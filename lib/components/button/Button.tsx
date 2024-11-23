@@ -1,5 +1,5 @@
 import {ReactNode} from "react";
-import './Button.css';
+import "./Button.css";
 
 export interface ButtonProps {
     variant?: 'primary' | 'secondary' | 'error',
