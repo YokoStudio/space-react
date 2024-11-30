@@ -1,7 +1,7 @@
-import {ReactNode} from "react";
+import {ButtonHTMLAttributes, DetailedHTMLProps, ReactNode} from "react";
 import "./Button.css";
 
-export interface ButtonProps {
+export interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>{
     variant?: 'primary' | 'secondary' | 'error',
     status?: 'filled' | 'outlined' | 'ghost',
     disabled?: boolean,
@@ -10,8 +10,6 @@ export interface ButtonProps {
 }
 
 export const Button = ({variant = 'primary', status = 'filled', size = 'md', disabled, children, ...props}: ButtonProps) => {
-    console.log(variant, status, disabled)
-
     return (
         <button
             disabled={disabled}
