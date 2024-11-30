@@ -1,0 +1,10 @@
+.input {
+    @apply h-8 text-neutral-2-default border border-neutral-6-default border-solid py-1 px-2 rounded text-body-b1 transition-all duration-200 ease-in-out outline-transparent outline placeholder:text-neutral-2-disable;
+    @apply hover:border-neutral-6-hover;
+    @apply focus:border-neutral-focus-dark focus:outline-neutral-focus-dark;
+    @apply disabled:text-neutral-1-disable disabled:border-neutral-2-disable disabled:bg-neutral-1-disable;
+
+    &.error {
+        @apply border-error-1-default;
+    }
+}
