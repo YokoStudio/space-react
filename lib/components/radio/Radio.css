@@ -1,0 +1,21 @@
+.radio {
+    @apply size-4 border-2 border-solid border-neutral-2-default rounded-full flex justify-center items-center transition-all ease-in-out duration-200 cursor-pointer;
+    @apply before:content-[''] before:bg-transparent before:size-2 before:block before:rounded-full before:transition-all before:ease-in-out before:duration-200;
+
+    @apply hover:border-neutral-2-hover;
+    @apply focus:border-neutral-2-default [&:not([aria-disabled="true"])]:focus:ring-offset-2 [&:not([aria-disabled="true"])]:focus:ring-2 [&:not([aria-disabled="true"])]:focus:ring-neutral-1-default;
+    @apply active:border-neutral-2-press;
+
+    @apply aria-disabled:border-neutral-2-disable;
+
+    &[aria-checked="true"] {
+        @apply border-brand-1-default;
+        @apply before:bg-brand-1-default;
+
+        @apply before:hover:bg-brand-1-hover hover:border-brand-1-hover;
+        @apply before:focus:bg-brand-1-default focus:border-brand-1-default [&:not([aria-disabled="true"])]:focus:ring-offset-2 [&:not([aria-disabled="true"])]:focus:ring-2 [&:not([aria-disabled="true"])]:focus:ring-neutral-1-default;
+        @apply before:active:bg-brand-1-press active:border-brand-1-press;
+
+        @apply aria-disabled:before:bg-brand-1-disable aria-disabled:border-brand-1-disable;
+    }
+}
