@@ -1,5 +1,7 @@
 import {ButtonHTMLAttributes, DetailedHTMLProps, ReactNode} from "react";
 import "./Button.css";
+import { Button as BaseButton }from '@headlessui/react';
+import { clsx } from "clsx";
 
 export interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>{
     variant?: 'primary' | 'secondary' | 'error',
@@ -10,12 +12,10 @@ export interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTML
 }
 
 export const Button = ({variant = 'primary', status = 'filled', size = 'md', disabled, children, ...props}: ButtonProps) => {
+    console.log(variant, status, size, disabled, children, props)
     return (
-        <button
-            disabled={disabled}
-            className={`button ${variant} ${status} size-${size}`}
-            {...props}>
-                {children}
-        </button>
+        <BaseButton className={clsx('button', variant, status, 'size-'+size)}>
+            { children }
+        </BaseButton>
     );
 }
