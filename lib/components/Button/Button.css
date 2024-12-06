@@ -22,7 +22,6 @@
     }
 
 
-
     &.primary {
         &.filled {
             @apply ring-2 ring-brand-1-default border-2 border-solid border-transparent bg-brand-1-default text-neutral-10-default;
