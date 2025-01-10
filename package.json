@@ -16,6 +16,7 @@
         "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
         "@yokostudio/tailwind-space": "^0.3.0",
         "clsx": "^2.1.1",
+        "framer-motion": "^11.16.4",
         "react": "^18.3.1",
         "react-dom": "^18.3.1"
     },
