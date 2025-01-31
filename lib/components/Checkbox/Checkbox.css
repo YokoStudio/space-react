@@ -1,8 +1,9 @@
 .checkbox {
-    @apply size-4 inline-flex justify-center items-center rounded-[4px] transition-all ease-in-out duration-200 cursor-pointer border-[1.5px] border-neutral-2-default;
+    @apply size-4 inline-flex justify-center items-center rounded-[4px] transition-all ease-in-out duration-200 cursor-pointer border-2 border-neutral-2-default;
     @apply hover:border-neutral-2-hover;
     @apply focus:border-neutral-2-default;
     @apply active:border-neutral-2-press;
+    @apply data-[disabled]:border-neutral-2-disable data-[disabled]:cursor-default;
 
     &[data-checked], &[data-indeterminate] {
         @apply border-transparent;

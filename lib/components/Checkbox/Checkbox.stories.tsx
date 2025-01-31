@@ -49,27 +49,28 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const Template = (args: CheckboxProps) => {
+    const [checked, setChecked] = useState(args.checked);
+
+    useEffect(() => {
+        setChecked(args.checked);
+    }, [args.checked]);
+
+    return (
+        <Checkbox
+            {...args}
+            indeterminate={args.indeterminate}
+            checked={checked}
+            onChange={(value) => {
+                setChecked(value);
+                args.onChange(value);
+            }}
+        />
+    );
+};
+
 export const Default: Story = {
-    render: (args: CheckboxProps) => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        const [checked, setChecked] = useState(args.checked);
-
-        useEffect(() => {
-            setChecked(args.checked);
-        }, [args.checked]);
-
-        return (
-            <Checkbox
-                {...args}
-                indeterminate={args.indeterminate}
-                checked={checked}
-                onChange={(value) => {
-                    setChecked(value);
-                    args.onChange(value);
-                }}
-            />
-        );
-    },
+    render: Template,
     args: {
         checked: true,
         indeterminate: false,

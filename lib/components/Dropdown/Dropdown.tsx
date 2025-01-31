@@ -1,67 +1,90 @@
 import './Dropdown.css';
-import { Listbox, ListboxButton } from '@headlessui/react';
-import { useEffect, useRef, useState } from 'react';
+import {
+    Listbox,
+    ListboxButton,
+    ListboxOptions,
+    ListboxSelectedOption,
+} from '@headlessui/react';
 import { AngleDown } from './icons/AngleDown.tsx';
-import type { ListItemOptions, DropdownProps } from '../../types/dropdown.ts';
-import { DropdownList } from './components/List/List.tsx';
+import { DropdownListPosition, DropdownProps } from '../../types/dropdown.ts';
+import { DropdownContext } from './context.ts';
+import { useEffect, useState } from 'react';
 
-const labelGetterFunction = (item: ListItemOptions) => {
-    return item.label;
-};
-
-const onChangeItem = (
-    item: ListItemOptions | ListItemOptions[] | string | string[],
-) => {
-    console.log(item);
-};
-
-export function Dropdown({
-    options,
+export function Dropdown<T = unknown>({
+    children,
     value,
     placeholder = 'Select',
-    labelGetterFunc,
-    icon,
+    prependIcon,
     disabled,
     error,
-    multiple = false,
-}: DropdownProps) {
-    const [selected] = useState<Array<ListItemOptions>>([]);
-    const labelGetter = labelGetterFunc ?? labelGetterFunction;
-    const buttonRef = useRef<HTMLButtonElement | null>(null);
-    const [listWidth, setListWidth] = useState<number>(0);
+    multiple,
+    onChange,
+}: DropdownProps<T>) {
+    const [isMultiple, setIsMultiple] = useState<boolean | undefined>(multiple);
 
     useEffect(() => {
-        setListWidth(buttonRef.current?.offsetWidth ?? 0);
-    }, [buttonRef.current?.offsetWidth]);
+        if (multiple) {
+            onChange(Array.isArray(value) ? value : ([] as T[]));
+        } else {
+            onChange(Array.isArray(value) ? value[0] || (null as T) : value);
+        }
+        setIsMultiple(multiple);
+    }, [multiple]);
 
     return (
-        <div className="dropdown">
-            <Listbox
-                value={value}
-                onChange={onChangeItem}
-                multiple={multiple}
-                disabled={disabled}
-                invalid={error}
-            >
-                <ListboxButton className="dropdown__button" ref={buttonRef}>
-                    {icon && <div className="dropdown__button__icon"></div>}
-                    <div className="dropdown__button__label">
-                        {selected.length
-                            ? labelGetter(selected[0])
-                            : placeholder}
-                    </div>
-                    <div className="dropdown__button__angle">
-                        <AngleDown />
-                    </div>
-                </ListboxButton>
+        <DropdownContext.Provider value={{ multiple: isMultiple }}>
+            <div className="dropdown">
+                <Listbox
+                    value={value}
+                    onChange={onChange}
+                    disabled={disabled}
+                    invalid={error}
+                    multiple={isMultiple}
+                >
+                    <ListboxButton
+                        className="dropdown__button h-8"
+                        disabled={disabled}
+                    >
+                        {({ value }) => (
+                            <>
+                                {prependIcon && (
+                                    <div className="dropdown__button__icon">
+                                        {prependIcon}
+                                    </div>
+                                )}
+                                {isMultiple &&
+                                Array.isArray(value) &&
+                                value.length ? (
+                                    <div className="dropdown__button__label">
+                                        {value.length} selected
+                                    </div>
+                                ) : (
+                                    <ListboxSelectedOption
+                                        as="div"
+                                        className="dropdown__button__label"
+                                        options={children}
+                                        placeholder={
+                                            <div className="dropdown__button__label_placeholder">
+                                                {placeholder}
+                                            </div>
+                                        }
+                                    />
+                                )}
+                                <div className="dropdown__button__angle">
+                                    <AngleDown />
+                                </div>
+                            </>
+                        )}
+                    </ListboxButton>
 
-                <DropdownList
-                    width={listWidth}
-                    options={options}
-                    value={''}
-                    multiple={multiple}
-                />
-            </Listbox>
-        </div>
+                    <ListboxOptions
+                        className="dropdown_list w-[var(--button-width)]"
+                        anchor={{ to: DropdownListPosition.Bottom, gap: 4 }}
+                    >
+                        {children}
+                    </ListboxOptions>
+                </Listbox>
+            </div>
+        </DropdownContext.Provider>
     );
 }
