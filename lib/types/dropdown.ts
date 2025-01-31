@@ -1,20 +1,33 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
+import { DropdownGroup, DropdownOption } from '../components/Dropdown';
 
-export interface DropdownProps {
-    icon?: ReactNode;
-    placeholder?: string;
-    options: ListItemOptions[] | string[];
-    value: string | ListItemOptions;
-    disabled?: boolean;
+export type DropdownChildren =
+    | ReactElement<typeof DropdownOption>
+    | ReactElement<typeof DropdownGroup>;
+
+export interface DropdownProps<T = unknown> {
+    name?: string;
     error?: boolean;
+    disabled?: boolean;
+    prependIcon?: ReactNode;
+    placeholder?: string;
     multiple?: boolean;
-    labelGetterFunc?: (item: ListItemOptions) => string;
+    defaultValue?: T | T[];
+    value: T | T[];
+    children: DropdownChildren | DropdownChildren[];
+    onChange: (value: DropdownProps['value']) => void;
 }
 
-export type ListItemOptions = {
+export interface DropdownOptionProp<T> {
+    value: T;
     label: string;
-    value: string | number;
+    prependIcon?: ReactNode;
     disabled?: boolean;
+    badge?: boolean;
+}
+
+export type DropdownGroupProp = {
+    label: string;
 };
 
 export enum DropdownListPosition {

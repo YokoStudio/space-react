@@ -4,32 +4,50 @@
 
 .dropdown__button {
     @apply min-w-64 bg-neutral-1-default border border-solid border-neutral-6-default flex gap-2 items-center px-2 py-1 rounded transition duration-200 ease-in-out outline-none;
-    @apply data-[disabled]:bg-neutral-1-disable data-[disabled]:border-neutral-2-disable;
+    @apply data-[disabled]:bg-neutral-1-disable data-[disabled]:border-neutral-6-disable;
     @apply hover:bg-neutral-1-hover;
     @apply data-[focus]:bg-neutral-1-default data-[focus]:ring-2 data-[focus]:ring-neutral-0;
     @apply data-[open]:ring-2 data-[open]:ring-neutral-0;
 
     .dropdown__button__label {
-        @apply text-neutral-6-default text-body-b1 grow text-start;
+        @apply text-neutral-2-default text-body-b1 grow text-start flex gap-2;
+
+        & > span {
+            @apply text-neutral-2-default;
+        }
+    }
+
+    .dropdown__button_label_placeholder {
+        @apply text-neutral-6-default text-body-b1;
     }
 
     .dropdown__button__angle {
-        @apply size-6 shrink-0 flex justify-center items-center;
+        @apply size-6 shrink-0 flex justify-center items-center transition-transform ease-in-out duration-200;
     }
 
     .dropdown__button__icon {
-        @apply size-6 shrink-0 flex justify-center items-center;
+        @apply size-6 shrink-0 flex justify-center items-center leading-[0];
+    }
+
+    &[data-open] {
+        .dropdown__button__angle {
+            @apply -rotate-180;
+        }
     }
 
     &[data-disabled] {
         @apply hover:bg-neutral-1-disable;
 
         .dropdown__button__label {
-            @apply text-neutral-6-disable;
+            @apply text-neutral-2-disable;
         }
 
         .dropdown__button__angle {
-            @apply text-neutral-6-disable;
+            @apply text-neutral-2-disable;
+        }
+
+        .dropdown__button__icon {
+            @apply text-neutral-2-disable;
         }
     }
 
@@ -37,3 +55,35 @@
         @apply border-error-1-default hover:border-error-1-hover;
     }
 }
+
+.dropdown_list {
+    @apply bg-neutral-1-default z-[9999] border border-solid border-neutral-6-default rounded p-2 outline-none;
+
+    .dropdown_listitem {
+        @apply h-7 flex justify-between items-center cursor-pointer rounded-sm transition duration-150 ease-in-out gap-1;
+        @apply hover:bg-neutral-1-hover;
+        @apply active:bg-neutral-1-press;
+        @apply data-[disabled]:bg-neutral-1-disable data-[disabled]:cursor-default;
+
+        .dropdown_listitem__checkbox {
+            @apply size-6 flex justify-center items-center shrink-0;
+        }
+        .dropdown_listitem__label {
+            @apply text-start text-body-b2 text-neutral-5-default grow;
+        }
+        .dropdown_listitem__badge {
+            @apply shrink-0;
+        }
+
+        &[data-disabled] {
+            .dropdown_listitem__checkbox {
+            }
+            .dropdown_listitem__label {
+                @apply text-neutral-5-disable;
+            }
+            .dropdown_listitem__badge {
+            }
+        }
+    }
+}
+
