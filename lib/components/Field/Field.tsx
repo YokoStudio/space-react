@@ -8,9 +8,14 @@ import {
 import { Input } from '../Input/Input.tsx';
 import { clsx } from 'clsx';
 
+enum FieldMode {
+    Normal = 'normal',
+    Compact = 'compact',
+}
+
 type FieldProps = {
     label: string;
-    compact?: boolean;
+    mode?: FieldMode;
     required?: boolean;
     message?: string;
     children: ReactNode;
@@ -22,7 +27,7 @@ export const Field = ({
     children: _children,
     required,
     message,
-    compact,
+    mode,
     className,
 }: FieldProps) => {
     const validChildren: (JSXElementConstructor<any> | string)[] = [Input];
@@ -39,7 +44,7 @@ export const Field = ({
         <div className={clsx('flex flex-col', className)}>
             <label
                 htmlFor={'text'}
-                className={`self-start relative bg-neutral-1-default px-0.5 transition ease-in-out ${compact && '-mb-2 ms-2'}`}
+                className={`self-start relative bg-neutral-1-default px-0.5 transition ease-in-out ${mode === FieldMode.Compact && '-mb-2 ms-2'}`}
             >
                 {label}
                 {required && (
