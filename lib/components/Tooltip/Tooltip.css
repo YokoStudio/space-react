@@ -1,0 +1,17 @@
+.tooltip-arrow:before {
+    @apply w-3 h-1.5 bg-neutral-1-default block absolute content-[''];
+    clip-path: path('M7.33649 0.843729L10.8 5L0.800049 5L4.26361 0.843731C5.0632 -0.115777 6.5369 -0.115779 7.33649 0.843729Z');
+
+    &.tooltip-arrow__down {
+        @apply -top-1 end-1;
+    }
+    &.tooltip-arrow__up {
+        @apply -bottom-1 end-1 rotate-180;
+    }
+    &.tooltip-arrow__right {
+        @apply -rotate-90 top-2 -left-2;
+    }
+    &.tooltip-arrow__left {
+        @apply rotate-90 top-2 -right-2;
+    }
+}
