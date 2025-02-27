@@ -1,9 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Tab } from './Tab.tsx';
+import { TabMode } from '../../types/tab.ts';
 
 const meta = {
     component: Tab,
+    argTypes: {
+        mode: {
+            type: 'string',
+            control: {
+                type: 'radio',
+                labels: {
+                    filled: 'Filled',
+                    outlined: 'Outlined',
+                },
+            },
+            options: [TabMode.Filled, TabMode.Outlined],
+        },
+    },
 } satisfies Meta<typeof Tab>;
 
 export default meta;
@@ -26,6 +40,6 @@ export const Default: Story = {
                 label: 'unknown',
             },
         ],
-        mode: 'outlined',
+        mode: TabMode.Filled,
     },
 };
