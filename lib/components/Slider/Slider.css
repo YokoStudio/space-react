@@ -1,0 +1,29 @@
+.slider {
+    @apply flex relative w-full;
+
+    .slider__trackbar {
+        @apply absolute flex gap-0.5;
+    }
+
+    .slider__track {
+        @apply w-auto bg-neutral-4-default rounded-full h-1 min-w-1;
+
+        &.slider__track--filled {
+            @apply bg-brand-1-default;
+        }
+    }
+
+    & [type="range"] {
+        -webkit-appearance: none;
+        @apply h-1;
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            @apply size-4 rounded-full bg-neutral-1-default border-2 border-solid border-brand-1-default;
+        }
+
+        &::-moz-range-thumb {
+            @apply size-3 rounded-full bg-neutral-1-default border-2 border-solid border-brand-1-default;
+        }
+    }
+}

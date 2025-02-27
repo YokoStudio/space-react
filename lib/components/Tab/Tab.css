@@ -1,0 +1,29 @@
+.tab {
+    &.filled {
+        @apply bg-neutral-3-default rounded-lg p-1 w-fit flex;
+
+        & button {
+            @apply rounded px-2 py-1 flex justify-center items-center gap-1 text-body-b2 outline-none text-neutral-5-default;
+            @apply data-[hover]:text-neutral-5-hover;
+            @apply focus:text-brand-1-default focus:ring-2 focus:ring-neutral-1-default;
+            @apply data-[active]:text-neutral-5-press;
+            @apply data-[selected]:bg-neutral-1-default data-[selected]:text-brand-1-default;
+        }
+    }
+
+    &.outlined {
+        @apply flex w-fit;
+
+        & button {
+            @apply px-3 py-2 border-b-2 border-solid border-neutral-9-default flex justify-center items-center gap-1 text-body-b2 outline-none text-neutral-5-default;
+
+            @apply data-[selected]:border-brand-1-default data-[selected]:text-neutral-2-default;
+
+            @apply data-[hover]:text-neutral-5-hover;
+            @apply focus:text-brand-1-default focus:ring-2 focus:ring-neutral-1-default focus:border-transparent;
+            @apply data-[active]:text-neutral-5-press;
+            @apply data-[disabled]:text-neutral-5-disable ;
+        /*    data-[disabled]:border-neutral-9-disable*/
+        }
+    }
+}
