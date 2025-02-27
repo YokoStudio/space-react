@@ -1,6 +1,6 @@
 .textarea {
     &>textarea {
-        @apply w-full h-full min-h-6 border-none outline-none pe-6;
+        @apply w-full h-full min-h-6 border-none outline-none pe-10;
     }
 
     @apply flex gap-2 h-fit relative text-neutral-2-default border border-neutral-6-default border-solid py-1 px-2 rounded text-body-b1 transition-all duration-200 ease-in-out outline-transparent outline placeholder:text-neutral-2-disable;

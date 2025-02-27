@@ -1,12 +1,12 @@
 import { Textarea as BaseTextarea } from '@headlessui/react';
 import './Textarea.css';
 import { ReactNode } from 'react';
-import { CrossCircle } from './icons/cross-circle.tsx';
 
 export type TextareaProps = {
     prependIcon: ReactNode;
     name?: string;
     value: string;
+    actionButton: ReactNode;
     defaultValue?: string;
 };
 
@@ -15,17 +15,19 @@ export const Textarea = ({
     value,
     defaultValue,
     prependIcon,
+    actionButton,
 }: TextareaProps) => {
     return (
         <div className="textarea">
-            <BaseTextarea name={name} value={value} defaultValue={defaultValue}>
-                <span className="textarea-prependicon">{prependIcon}</span>
-                {(defaultValue || value) && (
-                    <span className="textarea-action">
-                        <CrossCircle />
-                    </span>
-                )}
-            </BaseTextarea>
+            <span className="textarea-prependicon">{prependIcon}</span>
+            <BaseTextarea
+                name={name}
+                value={value}
+                defaultValue={defaultValue}
+            ></BaseTextarea>
+            {actionButton && (
+                <span className="textarea-action">{actionButton}</span>
+            )}
         </div>
     );
 };
