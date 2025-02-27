@@ -19,7 +19,7 @@ type FieldProps = {
     required?: boolean;
     message?: string;
     children: ReactNode;
-    className: string;
+    className?: string;
 };
 
 export const Field = ({
