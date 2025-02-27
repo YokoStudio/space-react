@@ -12,13 +12,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-    render({ label, required, message, compact }) {
+    render({ label, required, message, mode }) {
         return (
             <Field
                 label={label}
                 required={required}
                 message={message}
-                compact={compact}
+                mode={mode}
             >
                 <Input />
             </Field>
@@ -29,6 +29,6 @@ export const Default: Story = {
         label: 'Email Address',
         required: true,
         message: 'Enter valid email',
-        compact: true,
+        mode: 'compact',
     },
 };
