@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Tooltip } from './Tooltip.tsx';
 import { Badge, BadgeType, BadgeVariant } from '../Badge/Badge.tsx';
-import { Button } from '../Button/Button.tsx';
 
 const meta = {
     component: Tooltip,
@@ -13,6 +12,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+    render: function Render(args) {
+        return (
+            <div className="m-96">
+                <Tooltip {...args}>
+                    <span>Hover me!</span>
+                </Tooltip>
+            </div>
+        );
+    },
     args: {
         badge: (
             <Badge
@@ -23,7 +31,7 @@ export const Default: Story = {
         ),
         text: 'Text',
         label: 'Label',
-        children: <Button>salam</Button>,
-        position: 'up',
+        children: null,
+        position: 'top',
     },
 };
