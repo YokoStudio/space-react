@@ -21,7 +21,7 @@ export const Tooltip = ({
     className,
     children,
 }: TooltipProps) => {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const arrowRef = useRef(null);
     const { refs, floatingStyles, context } = useFloating({
         open: isOpen,
