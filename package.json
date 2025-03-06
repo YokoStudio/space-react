@@ -12,6 +12,7 @@
     "build-storybook": "storybook build -o ./docs --docs"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.27.5",
     "@headlessui/react": "^2.2.0",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@yokostudio/tailwind-space": "^0.3.1",
