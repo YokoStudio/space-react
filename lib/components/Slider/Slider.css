@@ -6,7 +6,7 @@
     }
 
     .slider__track {
-        @apply w-auto bg-neutral-4-default rounded-full h-1 min-w-1;
+        @apply w-auto bg-neutral-4-default rounded-full h-1;
 
         &.slider__track--filled {
             @apply bg-brand-1-default;

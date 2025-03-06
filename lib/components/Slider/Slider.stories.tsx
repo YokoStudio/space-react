@@ -5,6 +5,14 @@ import { useEffect, useState } from 'react';
 
 const meta = {
     component: Slider,
+    argTypes: {
+        mode: {
+            control: {
+                type: 'radio',
+            },
+            options: ['linear', 'section'],
+        },
+    },
 } satisfies Meta<typeof Slider>;
 
 export default meta;
@@ -31,6 +39,7 @@ export const Default: Story = {
         min: 1,
         step: 1,
         value: 1,
+        mode: 'linear',
         onChange() {},
     },
 };

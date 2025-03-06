@@ -1,7 +1,16 @@
-import './Tooltip.css';
 import { clsx } from 'clsx';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { TooltipProps } from '../../types/tooltip.ts';
+import {
+    useFloating,
+    useHover,
+    useInteractions,
+    useTransitionStyles,
+    FloatingArrow,
+    arrow,
+    offset,
+    useFocus,
+} from '@floating-ui/react';
 
 export const Tooltip = ({
     label,
@@ -12,96 +21,71 @@ export const Tooltip = ({
     className,
     children,
 }: TooltipProps) => {
-    const [isVisible, setIsVisible] = useState(false);
-    const [tooltipPosition, setTooltipPosition] = useState(position);
-    const tooltipRef = useRef<HTMLDivElement>(null);
-    const targetRef = useRef<HTMLDivElement>(null);
+    const [isOpen, setIsOpen] = useState(true);
+    const arrowRef = useRef(null);
+    const { refs, floatingStyles, context } = useFloating({
+        open: isOpen,
+        onOpenChange: setIsOpen,
+        placement: position,
+        middleware: [
+            arrow({
+                element: arrowRef,
+            }),
+            offset(6 + 4),
+        ],
+    });
+    const hover = useHover(context, {
+        delay,
+        restMs: 150,
+    });
+    const focus = useFocus(context);
+    const { getFloatingProps, getReferenceProps } = useInteractions([
+        hover,
+        focus,
+    ]);
 
-    const handleMouseEnter = () => {
-        setTimeout(() => setIsVisible(true), delay);
-    };
-
-    const handleMouseLeave = () => {
-        setIsVisible(false);
-    };
-
-    useEffect(() => {
-        const updatePosition = () => {
-            if (!targetRef.current || !tooltipRef.current) return;
-
-            const targetRect = targetRef.current.getBoundingClientRect();
-            const tooltipRect = tooltipRef.current.getBoundingClientRect();
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-
-            let newPosition: 'top' | 'bottom' | 'left' | 'right' = position;
-
-            if (position === 'top') {
-                if (targetRect.top - tooltipRect.height < 0) {
-                    newPosition = 'bottom';
-                }
-            } else if (position === 'bottom') {
-                if (targetRect.bottom + tooltipRect.height > viewportHeight) {
-                    newPosition = 'top';
-                }
-            } else if (position === 'left') {
-                if (targetRect.left - tooltipRect.width < 0) {
-                    newPosition = 'right';
-                }
-            } else if (position === 'right') {
-                if (targetRect.right + tooltipRect.width > viewportWidth) {
-                    newPosition = 'left';
-                }
-            }
-
-            setTooltipPosition(newPosition);
-        };
-
-        updatePosition();
-        window.addEventListener('resize', updatePosition);
-
-        return () => {
-            window.removeEventListener('resize', updatePosition);
-        };
-    }, [position]);
-
-    const arrowClass = clsx(
-        'tooltip-arrow',
-        tooltipPosition === 'top' && 'tooltip-arrow-top',
-        tooltipPosition === 'bottom' && 'tooltip-arrow-bottom',
-        tooltipPosition === 'left' && 'tooltip-arrow-left',
-        tooltipPosition === 'right' && 'tooltip-arrow-right',
-    );
-
-    const tooltipClass = clsx(
-        'tooltip',
-        tooltipPosition && `tooltip-${tooltipPosition}`,
-        isVisible ? 'tooltip-visible' : 'tooltip-hidden',
-        className,
-    );
+    const { isMounted, styles } = useTransitionStyles(context);
 
     return (
-        <div
-            className="tooltip-container"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            ref={targetRef}
-        >
-            <div ref={tooltipRef} className={tooltipClass}>
-                {label && (
-                    <div className="text-neutral-1-default text-caption-c1 mb-1">
-                        {label}
+        <>
+            {isMounted && (
+                <div
+                    ref={refs.setFloating}
+                    style={{ ...floatingStyles, ...styles }}
+                    {...getFloatingProps()}
+                    className={clsx(
+                        'bg-neutral-1-default text-white p-2 rounded text-xs z-10 shadow-12',
+                        className,
+                    )}
+                >
+                    {label && (
+                        <div className="text-neutral-1-default text-caption-c1 mb-1">
+                            {label}
+                        </div>
+                    )}
+                    <div className="flex items-center gap-0.5">
+                        {badge}
+                        <span className="text-neutral-1-default text-caption-c1">
+                            {text}
+                        </span>
                     </div>
-                )}
-                <div className="flex items-center gap-0.5">
-                    {badge}
-                    <span className="text-neutral-1-default text-caption-c1">
-                        {text}
-                    </span>
+                    <FloatingArrow
+                        context={context}
+                        ref={arrowRef}
+                        fill="white"
+                        width={11}
+                        height={6}
+                        tipRadius={4}
+                    />
                 </div>
-                <div className={arrowClass} />
+            )}
+            <div
+                className="inline-block"
+                ref={refs.setReference}
+                {...getReferenceProps()}
+            >
+                {children}
             </div>
-            <div className="tooltip-target">{children}</div>
-        </div>
+        </>
     );
 };

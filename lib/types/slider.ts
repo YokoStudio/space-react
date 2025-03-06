@@ -5,5 +5,6 @@ export interface SliderProps {
     min: number;
     max: number;
     value: number;
+    mode?: 'section' | 'linear';
     onChange: FormEventHandler<HTMLInputElement>;
 }

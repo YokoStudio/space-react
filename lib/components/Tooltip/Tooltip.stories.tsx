@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
     render: function Render(args) {
         return (
-            <div className="m-96">
+            <div className="m-72">
                 <Tooltip {...args}>
                     <span>Hover me!</span>
                 </Tooltip>
