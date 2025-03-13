@@ -9,13 +9,15 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build -o ./docs --docs"
+    "build-storybook": "storybook build -o ./docs --docs",
+    "chromatic": "npx chromatic --project-token=chpt_1ab15b8e62b4580"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.5",
     "@headlessui/react": "^2.2.0",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@yokostudio/tailwind-space": "^0.3.1",
+    "chromatic": "^11.27.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.16.4",
     "react": "^18.3.1",
