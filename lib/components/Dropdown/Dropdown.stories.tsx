@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Dropdown } from './Dropdown.tsx';
 import { useEffect, useState } from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { DropdownOption } from './DropdownOption.tsx';
 import { DropdownProps } from '../../types/dropdown.ts';
 import { DropdownGroup } from './DropdownGroup.tsx';
