@@ -1,0 +1,35 @@
+.field {
+    @apply flex flex-col;
+
+    &--normal {
+        /* Default field mode */
+    }
+
+    &--compact {
+        /* Compact field mode */
+    }
+
+    &__label {
+        @apply self-start relative bg-neutral-1-default px-0.5 transition ease-in-out text-body-b2 text-neutral-2-default;
+
+        &--compact {
+            @apply -mb-2 ms-2;
+        }
+    }
+
+    &__required {
+        @apply ms-1 text-error-1-default;
+    }
+
+    &__hint {
+        @apply text-caption-c1 text-neutral-5-default mb-1;
+    }
+
+    &__message {
+        @apply flex gap-1 text-caption-c1 mt-1;
+
+        &--error {
+            @apply text-error-1-default;
+        }
+    }
+} 
