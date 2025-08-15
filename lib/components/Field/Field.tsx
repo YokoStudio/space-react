@@ -2,60 +2,98 @@ import { WarningCircle } from './icons/warning-circle.tsx';
 import {
     Children,
     isValidElement,
-    JSXElementConstructor,
     ReactNode,
+    useId,
+    cloneElement,
 } from 'react';
 import { Input } from '../Input/Input.tsx';
+import { Textarea } from '../Textarea/Textarea.tsx';
 import { clsx } from 'clsx';
+import './Field.css';
 
 enum FieldMode {
     Normal = 'normal',
     Compact = 'compact',
 }
 
-type FieldProps = {
+interface FieldProps {
     label: string;
     mode?: FieldMode;
     required?: boolean;
     message?: string;
+    error?: boolean;
+    hint?: string;
     children: ReactNode;
     className?: string;
-};
+    id?: string;
+}
 
 export const Field = ({
     label,
     children: _children,
     required,
     message,
-    mode,
+    error,
+    hint,
+    mode = FieldMode.Normal,
     className,
+    id: propId,
 }: FieldProps) => {
-    const validChildren: (JSXElementConstructor<any> | string)[] = [Input];
+    const generatedId = useId();
+    const fieldId = propId || generatedId;
+
+    const validChildren = [Input, Textarea];
 
     const children = Children.map(_children, (child) => {
-        if (isValidElement(child) && validChildren.includes(child.type)) {
-            return child;
+        if (
+            isValidElement(child) &&
+            validChildren.includes(child.type as typeof Input | typeof Textarea)
+        ) {
+            return cloneElement(child, {
+                'aria-describedby': hint ? `${fieldId}-hint` : undefined,
+                'aria-invalid': error || undefined,
+            });
         }
         console.warn('Invalid child type:', child);
         return null;
     });
 
     return (
-        <div className={clsx('flex flex-col', className)}>
+        <div className={clsx('field', `field--${mode}`, className)}>
             <label
-                htmlFor={'text'}
-                className={`self-start relative bg-neutral-1-default px-0.5 transition ease-in-out ${mode === FieldMode.Compact && '-mb-2 ms-2'}`}
+                htmlFor={fieldId}
+                className={clsx(
+                    'field__label',
+                    mode === FieldMode.Compact && 'field__label--compact',
+                )}
             >
                 {label}
                 {required && (
-                    <span className="ms-1 text-error-1-default">*</span>
+                    <span className="field__required" aria-label="required">
+                        *
+                    </span>
                 )}
             </label>
+
+            {hint && (
+                <div id={`${fieldId}-hint`} className="field__hint">
+                    {hint}
+                </div>
+            )}
+
             {children}
+
             {message && (
-                <div className="flex gap-1 text-caption-c1 text-neutral-5-default mt-1">
+                <div
+                    className={clsx(
+                        'field__message',
+                        error && 'field__message--error',
+                    )}
+                    role={error ? 'alert' : 'status'}
+                    aria-live={error ? 'assertive' : 'polite'}
+                >
                     <WarningCircle />
-                    {message}
+                    <span>{message}</span>
                 </div>
             )}
         </div>

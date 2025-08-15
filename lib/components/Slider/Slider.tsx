@@ -1,31 +1,40 @@
 import './Slider.css';
-import React, { useState, useEffect, useRef } from 'react';
+import React, {
+    useState,
+    useEffect,
+    useRef,
+    useCallback,
+    useMemo,
+} from 'react';
 import { SliderProps } from '../../types/slider.ts';
+import { useSliderTrack } from '../../hooks/useSliderTrack';
 
-export const Slider = (props: SliderProps) => {
-    const modes = {
-        linear: LinearSlider,
-        section: SectionSlider,
-    };
+export const Slider = React.memo((props: SliderProps) => {
+    const { mode = 'linear', ...sliderProps } = props;
 
-    let { mode } = props;
+    const Component = useMemo(() => {
+        const modes = {
+            linear: LinearSlider,
+            section: SectionSlider,
+        };
+        return modes[mode as keyof typeof modes] || LinearSlider;
+    }, [mode]);
 
-    if (!mode || !['linear', 'section'].includes(mode)) {
-        mode ??= 'linear';
-    }
+    const handleChange = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const newValue = Math.min(
+                Math.max(Number(e.target.value), props.min),
+                props.max,
+            );
+            props.onChange({ ...e, target: { ...e.target, value: newValue } });
+        },
+        [props.min, props.max, props.onChange],
+    );
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = Math.min(
-            Math.max(Number(e.target.value), props.min),
-            props.max,
-        );
-        props.onChange({ ...e, target: { ...e.target, value: newValue } });
-    };
+    return <Component {...sliderProps} onChange={handleChange} mode={mode} />;
+});
 
-    const Component = modes[mode];
-
-    return <Component {...props} onChange={onChange} mode={mode} />;
-};
+Slider.displayName = 'Slider';
 
 const SectionSlider = ({
     step = 1,
@@ -34,39 +43,30 @@ const SectionSlider = ({
     value,
     onChange,
 }: SliderProps) => {
-    const [trackItemWidth, setTrackItemWidth] = useState(1);
-    const [steps, setSteps] = useState(0);
-    const [stepIndex, setStepIndex] = useState(0);
-
     const sliderRef = useRef<HTMLInputElement>(null);
-
-    useEffect(() => {
-        const totalSteps = Math.max(Math.floor((max - min) / step), 1);
-        setSteps(totalSteps);
-        setStepIndex(
-            Math.max(0, Math.min(Math.floor((value - min) / step), totalSteps)),
-        );
-    }, [min, max, step, value]);
+    const {
+        trackItemWidth,
+        steps,
+        stepIndex,
+        updateTrackWidth,
+        validateValue,
+    } = useSliderTrack({
+        min,
+        max,
+        step,
+        value,
+    });
 
     useEffect(() => {
         if (sliderRef.current) {
             const trackWidth = sliderRef.current.offsetWidth;
-            setTrackItemWidth((trackWidth - (16 + steps * 2)) / steps);
+            updateTrackWidth(trackWidth);
         }
-    }, [steps, sliderRef.current?.offsetWidth]);
+    }, [updateTrackWidth]);
 
     useEffect(() => {
-        if (value < min) {
-            console.warn(
-                `Slider: The value cannot be smaller than the minimum value (${min}).`,
-            );
-        }
-        if (value > max) {
-            console.warn(
-                `Slider: The value cannot be larger than the maximum value (${max}).`,
-            );
-        }
-    }, [value, min, max]);
+        validateValue(value);
+    }, [value, validateValue]);
 
     return (
         <div className="slider" ref={sliderRef}>
@@ -87,6 +87,9 @@ const SectionSlider = ({
                 min={min}
                 max={max}
                 onInput={onChange}
+                aria-valuemin={min}
+                aria-valuemax={max}
+                aria-valuenow={value}
             />
             <div className="slider__trackbar end-0">
                 {Array.from({
@@ -104,39 +107,30 @@ const SectionSlider = ({
 };
 
 const LinearSlider = ({ step = 1, min, max, value, onChange }: SliderProps) => {
-    const [trackItemWidth, setTrackItemWidth] = useState(0);
-    const [steps, setSteps] = useState(0);
-    const [stepIndex, setStepIndex] = useState(0);
-
     const sliderRef = useRef<HTMLInputElement>(null);
-
-    useEffect(() => {
-        const totalSteps = Math.max(Math.floor((max - min) / step), 1);
-        setSteps(totalSteps);
-        setStepIndex(
-            Math.max(0, Math.min(Math.floor((value - min) / step), totalSteps)),
-        );
-    }, [min, max, step, value]);
+    const {
+        trackItemWidth,
+        steps,
+        stepIndex,
+        updateTrackWidth,
+        validateValue,
+    } = useSliderTrack({
+        min,
+        max,
+        step,
+        value,
+    });
 
     useEffect(() => {
         if (sliderRef.current) {
             const trackWidth = sliderRef.current.offsetWidth;
-            setTrackItemWidth((trackWidth - 16) / steps);
+            updateTrackWidth(trackWidth);
         }
-    }, [steps, sliderRef.current?.offsetWidth]);
+    }, [updateTrackWidth]);
 
     useEffect(() => {
-        if (value < min) {
-            console.warn(
-                `Slider: The value cannot be smaller than the minimum value (${min}).`,
-            );
-        }
-        if (value > max) {
-            console.warn(
-                `Slider: The value cannot be larger than the maximum value (${max}).`,
-            );
-        }
-    }, [value, min, max]);
+        validateValue(value);
+    }, [value, validateValue]);
 
     const startTrackWidth =
         trackItemWidth * stepIndex > 2 ? trackItemWidth * stepIndex - 2 : 0;
@@ -163,6 +157,9 @@ const LinearSlider = ({ step = 1, min, max, value, onChange }: SliderProps) => {
                     min={min}
                     max={max}
                     onInput={onChange}
+                    aria-valuemin={min}
+                    aria-valuemax={max}
+                    aria-valuenow={value}
                 />
                 <div className="slider__trackbar end-0">
                     <div

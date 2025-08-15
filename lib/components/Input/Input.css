@@ -4,7 +4,71 @@
     @apply focus:border-neutral-focus-dark focus:outline-neutral-focus-dark;
     @apply disabled:text-neutral-1-disable disabled:border-neutral-2-disable disabled:bg-neutral-1-disable;
 
-    &.error {
+    &.input--error {
         @apply border-error-1-default;
+    }
+
+    &.input--sm {
+        @apply h-6 text-caption-c1 py-0.5 px-1.5;
+    }
+
+    &.input--md {
+        @apply h-8 text-body-b1 py-1 px-2;
+    }
+
+    &.input--lg {
+        @apply h-10 text-body-b1 py-1.5 px-3;
+    }
+
+    &.input--with-left-icon {
+        @apply pl-8;
+    }
+
+    &.input--with-right-icon {
+        @apply pr-8;
+    }
+}
+
+.input-wrapper {
+    @apply flex flex-col;
+
+    &--full-width {
+        @apply w-full;
+    }
+
+    &__label {
+        @apply text-body-b2 text-neutral-2-default mb-1;
+    }
+
+    &__required {
+        @apply text-error-1-default ml-1;
+    }
+
+    &__container {
+        @apply relative flex items-center;
+    }
+
+    &__icon {
+        @apply absolute text-neutral-5-default;
+
+        &--left {
+            @apply left-2;
+        }
+
+        &--right {
+            @apply right-2;
+        }
+    }
+
+    &__clear-button {
+        @apply absolute right-2 text-neutral-5-default hover:text-neutral-2-default;
+    }
+
+    &__helper-text {
+        @apply text-caption-c1 mt-1;
+
+        &--error {
+            @apply text-error-1-default;
+        }
     }
 }

@@ -1,21 +1,59 @@
-.radio {
-    @apply size-4 border-2 border-solid border-neutral-2-default rounded-full flex justify-center items-center transition-all ease-in-out duration-200 cursor-pointer;
-    @apply before:content-[''] before:bg-transparent before:size-2 before:block before:rounded-full before:transition-all before:ease-in-out before:duration-200;
+.radio-group {
+    @apply flex gap-4;
 
-    @apply hover:border-neutral-2-hover;
-    @apply focus:border-neutral-2-default [&:not([aria-disabled="true"])]:focus:ring-offset-2 [&:not([aria-disabled="true"])]:focus:ring-2 [&:not([aria-disabled="true"])]:focus:ring-neutral-1-default;
-    @apply active:border-neutral-2-press;
+    &--row {
+        @apply flex-row;
+    }
 
-    @apply aria-disabled:border-neutral-2-disable;
+    &--column {
+        @apply flex-col;
+    }
 
-    &[aria-checked="true"] {
-        @apply border-brand-1-default;
-        @apply before:bg-brand-1-default;
+    &--error {
+        @apply border-error-1-default;
+    }
 
-        @apply before:hover:bg-brand-1-hover hover:border-brand-1-hover;
-        @apply before:focus:bg-brand-1-default focus:border-brand-1-default [&:not([aria-disabled="true"])]:focus:ring-offset-2 [&:not([aria-disabled="true"])]:focus:ring-2 [&:not([aria-disabled="true"])]:focus:ring-neutral-1-default;
-        @apply before:active:bg-brand-1-press active:border-brand-1-press;
+    &--disabled {
+        @apply opacity-50;
+    }
+}
 
-        @apply aria-disabled:before:bg-brand-1-disable aria-disabled:border-brand-1-disable;
+.radio-group-wrapper {
+    @apply flex flex-col;
+
+    &--error {
+        @apply border-error-1-default;
+    }
+
+    &--disabled {
+        @apply opacity-50;
+    }
+
+    &__header {
+        @apply mb-2;
+    }
+
+    &__legend {
+        @apply text-body-b2 text-neutral-2-default font-medium;
+    }
+
+    &__required {
+        @apply text-error-1-default ml-1;
+    }
+
+    &__label {
+        @apply text-body-b2 text-neutral-2-default;
+
+        &--disabled {
+            @apply text-neutral-5-disable;
+        }
+    }
+
+    &__helper-text {
+        @apply text-caption-c1 mt-2;
+
+        &--error {
+            @apply text-error-1-default;
+        }
     }
 }
