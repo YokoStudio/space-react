@@ -1,9 +1,30 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 import { Button } from './Button';
 
 const meta = {
     component: Button,
+    argTypes: {
+        size: {
+            type: 'string',
+            control: 'radio',
+            options: ['xs', 'sm', 'md', 'lg', 'xl'],
+        },
+        status: {
+            type: 'string',
+            control: 'radio',
+            options: ['filled', 'outlined', 'ghost'],
+        },
+        variant: {
+            type: 'string',
+            control: 'radio',
+            options: ['primary', 'secondary', 'error'],
+        },
+        disabled: {
+            type: 'boolean',
+            control: 'boolean',
+        },
+    },
 } satisfies Meta<typeof Button>;
 
 export default meta;
