@@ -13,4 +13,40 @@
         @apply active:bg-brand-1-press;
         @apply data-[disabled]:bg-brand-1-disable data-[disabled]:cursor-default;
     }
+
+    &.checkbox--error {
+        @apply border-error-1-default;
+    }
+
+    &.checkbox--disabled {
+        @apply opacity-50 cursor-not-allowed;
+    }
+}
+
+.checkbox-wrapper {
+    @apply flex flex-col;
+
+    &__container {
+        @apply flex items-center gap-2;
+    }
+
+    &__label {
+        @apply text-body-b2 text-neutral-2-default;
+
+        &--disabled {
+            @apply text-neutral-5-disable;
+        }
+    }
+
+    &__required {
+        @apply text-error-1-default ml-1;
+    }
+
+    &__helper-text {
+        @apply text-caption-c1 mt-1 ml-6;
+
+        &--error {
+            @apply text-error-1-default;
+        }
+    }
 }

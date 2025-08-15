@@ -11,8 +11,23 @@ export type OptionSlotProps = {
     disabled?: boolean;
 };
 
-export type RadioGroupProps = BaseRadioGroupProps & {
-    options: string[];
-    direction?: RadioGroupDirection;
-    optionSlot?: ({ value, disabled }: OptionSlotProps) => ReactNode;
-};
+export interface RadioGroupOption {
+    value: any;
+    label: string;
+    disabled?: boolean;
+}
+
+export interface RadioGroupProps {
+    value: any;
+    options?: RadioGroupOption[];
+    disabled?: boolean;
+    direction?: 'row' | 'column';
+    className?: string;
+    children?: React.ReactNode;
+    onChange?: (value: any) => void;
+    label?: string;
+    required?: boolean;
+    error?: boolean;
+    helperText?: string;
+    name?: string;
+}

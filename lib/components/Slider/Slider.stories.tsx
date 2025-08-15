@@ -1,45 +1,27 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
-import { Slider } from './Slider.tsx';
-import { useEffect, useState } from 'react';
+import { Slider } from './Slider';
 
 const meta = {
-    component: Slider,
-    argTypes: {
-        mode: {
-            control: {
-                type: 'radio',
-            },
-            options: ['linear', 'section'],
-        },
-    },
+	component: Slider,
+	title: 'Components/Slider',
+	parameters: { docs: { description: { component: 'Range slider supporting linear and section modes with accessible attributes.' } } },
+	argTypes: {
+		mode: { control: 'inline-radio', options: ['linear','section'] },
+		min: { control: 'number' },
+		max: { control: 'number' },
+		step: { control: 'number' },
+		value: { control: 'number' },
+	},
 } satisfies Meta<typeof Slider>;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-    render: function Render({ value, onChange: _, ...props }) {
-        const [_value, setValue] = useState(value);
+export const Linear: Story = {
+	args: { mode: 'linear', min: 0, max: 10, step: 1, value: 5, onChange: () => {} },
+};
 
-        useEffect(() => {
-            setValue(value);
-        }, [value]);
-
-        return (
-            <Slider
-                value={_value}
-                onChange={(e) => setValue(Number(e.target.value))}
-                {...props}
-            />
-        );
-    },
-    args: {
-        max: 10,
-        min: 1,
-        step: 1,
-        value: 1,
-        mode: 'linear',
-        onChange() {},
-    },
+export const Section: Story = {
+	args: { mode: 'section', min: 0, max: 10, step: 1, value: 5, onChange: () => {} },
 };

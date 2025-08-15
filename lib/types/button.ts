@@ -1,9 +1,14 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'primary' | 'secondary' | 'error';
+export interface ButtonProps
+    extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'size'> {
+    variant?: 'primary' | 'secondary' | 'error' | 'ghost';
     status?: 'filled' | 'outlined' | 'ghost';
-    disabled?: boolean;
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    loading?: boolean;
     children: ReactNode;
+    fullWidth?: boolean;
+    leftIcon?: ReactNode;
+    rightIcon?: ReactNode;
+    loadingText?: string;
 }

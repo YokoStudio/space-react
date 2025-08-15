@@ -1,61 +1,26 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
-import { RadioGroup } from './RadioGroup.tsx';
-import {
-    type RadioGroupProps,
-    RadioGroupDirection,
-} from '../../types/radioGroup.ts';
-import { useEffect, useState } from 'react';
+import { RadioGroup } from './RadioGroup';
 
 const meta = {
-    component: RadioGroup,
-    argTypes: {
-        direction: {
-            options: Object.values(RadioGroupDirection),
-            control: { type: 'radio' },
-        },
-    },
+	component: RadioGroup,
+	title: 'Components/RadioGroup',
+	parameters: { docs: { description: { component: 'Group of radio buttons with label, helper text, direction, and disabled/error states.' } } },
 } satisfies Meta<typeof RadioGroup>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const Template = ({ value, options, disabled, direction }: RadioGroupProps) => {
-    const [selected, setSelected] = useState<typeof value>();
-
-    useEffect(() => {
-        setSelected(value);
-    }, [value]);
-
-    return (
-        <RadioGroup
-            options={options}
-            value={selected}
-            disabled={disabled}
-            direction={direction}
-            onChange={(option) => {
-                setSelected(option);
-            }}
-        />
-    );
-};
+const options = [
+	{ label: 'A', value: 'a' },
+	{ label: 'B', value: 'b' },
+	{ label: 'C', value: 'c' },
+];
 
 export const Default: Story = {
-    render: Template,
-    args: {
-        options: ['reza', 'ali', 'mahdi'],
-        value: 'mahdi',
-        disabled: false,
-        direction: RadioGroupDirection.Row,
-        onChange: () => {},
-    },
+	args: { value: 'a', options, label: 'Pick one', direction: 'row' },
 };
 
-export const Disabled: Story = {
-    ...Default,
-    args: {
-        ...Default.args,
-        disabled: true,
-    },
-};
+export const Column: Story = { args: { ...Default.args, direction: 'column' } };
+export const Disabled: Story = { args: { ...Default.args, disabled: true } };
+export const Error: Story = { args: { ...Default.args, error: true, helperText: 'An error occurred' } };
