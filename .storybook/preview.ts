@@ -1,4 +1,4 @@
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react-vite';
 import '../public/orbit/style/yoko-orbit.css';
 import '../lib/index.css';
 

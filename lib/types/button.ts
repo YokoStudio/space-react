@@ -5,5 +5,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     status?: 'filled' | 'outlined' | 'ghost';
     disabled?: boolean;
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    prependIcon: ReactNode;
+    appendIcon: ReactNode;
     children: ReactNode;
 }
