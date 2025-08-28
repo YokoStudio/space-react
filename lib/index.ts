@@ -29,3 +29,6 @@ export { DropdownGroup } from './components/Dropdown/DropdownGroup.tsx';
 export { DropdownOption } from './components/Dropdown/DropdownOption.tsx';
 
 export { Tooltip } from './components/Tooltip/Tooltip.tsx';
+
+export { Icon } from './components/Icon/Icon.tsx';
+export type { IconProps } from './components/Icon/Icon.tsx';
