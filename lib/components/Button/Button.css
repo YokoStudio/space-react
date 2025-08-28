@@ -21,6 +21,16 @@
         @apply text-body-b1 gap-6 px-7 py-5;
     }
 
+    /* Disabled and loading states */
+    &:disabled,
+    &[disabled] {
+        @apply cursor-not-allowed pointer-events-none;
+    }
+
+    /* Loading state */
+    &.loading {
+        @apply cursor-wait;
+    }
 
     &.primary {
         &.filled {
@@ -48,7 +58,8 @@
             @apply active:text-brand-1-press active:ring-transparent;
         }
 
-        &.outlined[disabled], &.ghost[disabled] {
+        &.outlined[disabled],
+        &.ghost[disabled] {
             @apply bg-transparent border-transparent ring-transparent text-brand-1-disable;
         }
     }
@@ -79,7 +90,8 @@
             @apply active:text-neutral-1-press active:ring-neutral-subtle-dark-10 active:bg-neutral-subtle-dark-10;
         }
 
-        &.outlined[disabled], &.ghost[disabled] {
+        &.outlined[disabled],
+        &.ghost[disabled] {
             @apply bg-transparent border-transparent ring-transparent text-brand-1-disable;
         }
     }
@@ -110,8 +122,25 @@
             @apply active:text-error-1-press active:ring-transparent active:bg-error-1-default/15;
         }
 
-        &.outlined[disabled], &.ghost[disabled] {
+        &.outlined[disabled],
+        &.ghost[disabled] {
             @apply bg-transparent border-transparent ring-transparent text-brand-1-disable;
+        }
+    }
+
+    & .prepend-icon {
+        @apply size-5;
+
+        .size-xs {
+            @apply size-4;
+        }
+    }
+
+    & .append-icon {
+        @apply size-5;
+
+        .size-xs {
+            @apply size-4;
         }
     }
 }
