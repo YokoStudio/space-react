@@ -39,6 +39,16 @@ const meta = {
             control: 'radio',
             options: ['button', 'submit', 'reset'],
         },
+        prependIcon: {
+            type: 'string',
+            control: 'text',
+            defaultValue: <CheckIcon />,
+        },
+        appendIcon: {
+            type: 'string',
+            control: 'text',
+            defaultValue: <MinusIcon />,
+        },
     },
 } satisfies Meta<typeof Button>;
 

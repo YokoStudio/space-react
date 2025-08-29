@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { IconProps } from '../components/Icon/Icon';
 
 type ButtonColor = 'primary' | 'secondary' | 'error';
 type ButtonVariant = 'filled' | 'outlined' | 'ghost';
@@ -10,8 +11,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: ButtonVariant;
     disabled?: boolean;
     size?: ButtonSize;
-    prependIcon?: ReactNode;
-    appendIcon?: ReactNode;
+    prependIcon?: IconProps['name'] | ReactNode;
+    appendIcon?: IconProps['name'] | ReactNode;
     children: ReactNode;
 
     loading?: boolean;
