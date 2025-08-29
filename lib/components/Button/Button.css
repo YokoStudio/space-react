@@ -1,25 +1,28 @@
 .button {
     @apply flex rounded transition-all ease-in-out duration-200;
 
-    &.size-xs {
-        @apply text-caption-c1 gap-1;
+    &__size {
+        &--xs {
+            @apply text-caption-c1 gap-1;
+        }
+
+        &--sm {
+            @apply text-body-b2 gap-2 px-1;
+        }
+
+        &--md {
+            @apply text-body-b1 gap-2 px-3 py-1;
+        }
+
+        &--lg {
+            @apply text-body-b1 gap-4 px-5 py-3;
+        }
+
+        &--xl {
+            @apply text-body-b1 gap-6 px-7 py-5;
+        }
     }
 
-    &.size-sm {
-        @apply text-body-b2 gap-2 px-1;
-    }
-
-    &.size-md {
-        @apply text-body-b1 gap-2 px-3 py-1;
-    }
-
-    &.size-lg {
-        @apply text-body-b1 gap-4 px-5 py-3;
-    }
-
-    &.size-xl {
-        @apply text-body-b1 gap-6 px-7 py-5;
-    }
 
     /* Disabled and loading states */
     &:disabled,
@@ -32,103 +35,111 @@
         @apply cursor-wait;
     }
 
-    &.primary {
-        &.filled {
-            @apply ring-2 ring-brand-1-default border-2 border-solid border-transparent bg-brand-1-default text-neutral-10-default;
-            @apply hover:bg-brand-1-hover hover:ring-brand-1-hover;
-            @apply focus:bg-brand-1-default focus:border-neutral-100 focus:ring-neutral-0;
-            @apply active:bg-brand-1-press active:ring-brand-1-press active:border-brand-1-press;
+    &__color {
+        &--primary {
+            &.button__variant {
+                &--filled {
+                    @apply ring-2 ring-brand-1-default border-2 border-solid border-transparent bg-brand-1-default text-neutral-10-default;
+                    @apply hover:bg-brand-1-hover hover:ring-brand-1-hover;
+                    @apply focus:bg-brand-1-default focus:border-neutral-100 focus:ring-neutral-0;
+                    @apply active:bg-brand-1-press active:ring-brand-1-press active:border-brand-1-press;
+                }
+
+                &--filled[disabled] {
+                    @apply bg-brand-1-disable text-neutral-10-default border-brand-1-disable ring-brand-1-disable;
+                }
+
+                &--outlined {
+                    @apply border-2 border-transparent bg-transparent text-brand-1-default ring-1 ring-brand-1-default;
+                    @apply hover:bg-brand-subtle-10 hover:text-brand-1-hover;
+                    @apply focus:bg-transparent focus:text-brand-1-default focus:ring-2 focus:ring-neutral-0;
+                    @apply active:bg-brand-subtle-10 active:text-brand-1-press active:ring-brand-1-press active:ring-1;
+                }
+
+                &--ghost {
+                    @apply border-2 border-transparent bg-transparent text-brand-1-default ring-2 ring-transparent;
+                    @apply hover:text-brand-1-hover hover:bg-brand-subtle-10 hover:ring-transparent;
+                    @apply focus:text-brand-1-default focus:ring-neutral-0;
+                    @apply active:text-brand-1-press active:ring-transparent;
+                }
+
+                &--outlined[disabled],
+                &--ghost[disabled] {
+                    @apply bg-transparent border-transparent ring-transparent text-brand-1-disable;
+                }
+            }
         }
 
-        &.filled[disabled] {
-            @apply bg-brand-1-disable text-neutral-10-default border-brand-1-disable ring-brand-1-disable;
+        &--secondary {
+            &.button__variant {
+                &--filled {
+                    @apply ring-2 ring-neutral-0 border-2 border-solid border-transparent bg-neutral-10-default text-neutral-10-default;
+                    @apply hover:bg-neutral-10-hover hover:ring-neutral-1-default;
+                    @apply focus:bg-neutral-10-default focus:border-neutral-100 focus:ring-neutral-0;
+                    @apply active:bg-neutral-10-press active:ring-neutral-1-default active:border-neutral-1-default;
+                }
+
+                &--filled[disabled] {
+                    @apply bg-neutral-10-disable text-neutral-10-default border-neutral-75 ring-neutral-75;
+                }
+
+                &--outlined {
+                    @apply border-2 border-transparent bg-transparent text-neutral-1-default ring-1 ring-neutral-6-default;
+                    @apply hover:bg-neutral-subtle-dark-5 hover:text-neutral-1-hover hover:ring-neutral-6-hover;
+                    @apply focus:bg-transparent focus:text-neutral-1-default focus:ring-2 focus:ring-neutral-0;
+                    @apply active:bg-neutral-subtle-dark-10 active:text-neutral-1-press active:ring-neutral-6-press active:ring-1;
+                }
+
+                &--ghost {
+                    @apply border-2 border-transparent bg-transparent text-neutral-1-default ring-2 ring-transparent;
+                    @apply hover:text-neutral-1-hover hover:bg-neutral-subtle-dark-5 hover:ring-neutral-subtle-dark-5;
+                    @apply focus:text-neutral-1-default focus:ring-neutral-0;
+                    @apply active:text-neutral-1-press active:ring-neutral-subtle-dark-10 active:bg-neutral-subtle-dark-10;
+                }
+
+                &--outlined[disabled],
+                &--ghost[disabled] {
+                    @apply bg-transparent border-transparent ring-transparent text-brand-1-disable;
+                }
+            }
         }
 
-        &.outlined {
-            @apply border-2 border-transparent bg-transparent text-brand-1-default ring-1 ring-brand-1-default;
-            @apply hover:bg-brand-subtle-10 hover:text-brand-1-hover;
-            @apply focus:bg-transparent focus:text-brand-1-default focus:ring-2 focus:ring-neutral-0;
-            @apply active:bg-brand-subtle-10 active:text-brand-1-press active:ring-brand-1-press active:ring-1;
-        }
+        &--error {
+            &.button__variant {
+                &--filled {
+                    @apply ring-2 ring-error-1-default border-2 border-solid border-transparent bg-error-1-default text-neutral-10-default;
+                    @apply hover:bg-error-1-hover hover:ring-error-1-hover;
+                    @apply focus:bg-error-1-default focus:border-neutral-100 focus:ring-neutral-0;
+                    @apply active:bg-error-1-press active:ring-error-1-press active:border-error-1-press;
+                }
 
-        &.ghost {
-            @apply border-2 border-transparent bg-transparent text-brand-1-default ring-2 ring-transparent;
-            @apply hover:text-brand-1-hover hover:bg-brand-subtle-10 hover:ring-transparent;
-            @apply focus:text-brand-1-default focus:ring-neutral-0;
-            @apply active:text-brand-1-press active:ring-transparent;
-        }
+                &--filled[disabled] {
+                    @apply bg-error-1-disable text-neutral-10-default border-neutral-2-disable ring-neutral-2-disable;
+                }
 
-        &.outlined[disabled],
-        &.ghost[disabled] {
-            @apply bg-transparent border-transparent ring-transparent text-brand-1-disable;
+                &--outlined {
+                    @apply border-2 border-transparent bg-transparent text-error-1-default ring-1 ring-error-1-default;
+                    @apply hover:bg-error-1-default/10 hover:text-error-1-hover;
+                    @apply focus:bg-transparent focus:text-error-1-default focus:ring-2 focus:ring-neutral-0;
+                    @apply active:bg-error-1-default/15 active:text-error-1-press active:ring-error-1-press active:ring-1;
+                }
+
+                &--ghost {
+                    @apply border-2 border-transparent bg-transparent text-error-1-default ring-2 ring-transparent;
+                    @apply hover:text-error-1-hover hover:bg-error-1-default/10 hover:ring-transparent;
+                    @apply focus:text-error-1-default focus:ring-neutral-0 focus:bg-transparent;
+                    @apply active:text-error-1-press active:ring-transparent active:bg-error-1-default/15;
+                }
+
+                &--outlined[disabled],
+                &--ghost[disabled] {
+                    @apply bg-transparent border-transparent ring-transparent text-brand-1-disable;
+                }
+            }
         }
     }
 
-    &.secondary {
-        &.filled {
-            @apply ring-2 ring-neutral-0 border-2 border-solid border-transparent bg-neutral-10-default text-neutral-10-default;
-            @apply hover:bg-neutral-10-hover hover:ring-neutral-1-default;
-            @apply focus:bg-neutral-10-default focus:border-neutral-100 focus:ring-neutral-0;
-            @apply active:bg-neutral-10-press active:ring-neutral-1-default active:border-neutral-1-default;
-        }
-
-        &.filled[disabled] {
-            @apply bg-neutral-10-disable text-neutral-10-default border-neutral-75 ring-neutral-75;
-        }
-
-        &.outlined {
-            @apply border-2 border-transparent bg-transparent text-neutral-1-default ring-1 ring-neutral-6-default;
-            @apply hover:bg-neutral-subtle-dark-5 hover:text-neutral-1-hover hover:ring-neutral-6-hover;
-            @apply focus:bg-transparent focus:text-neutral-1-default focus:ring-2 focus:ring-neutral-0;
-            @apply active:bg-neutral-subtle-dark-10 active:text-neutral-1-press active:ring-neutral-6-press active:ring-1;
-        }
-
-        &.ghost {
-            @apply border-2 border-transparent bg-transparent text-neutral-1-default ring-2 ring-transparent;
-            @apply hover:text-neutral-1-hover hover:bg-neutral-subtle-dark-5 hover:ring-neutral-subtle-dark-5;
-            @apply focus:text-neutral-1-default focus:ring-neutral-0;
-            @apply active:text-neutral-1-press active:ring-neutral-subtle-dark-10 active:bg-neutral-subtle-dark-10;
-        }
-
-        &.outlined[disabled],
-        &.ghost[disabled] {
-            @apply bg-transparent border-transparent ring-transparent text-brand-1-disable;
-        }
-    }
-
-    &.error {
-        &.filled {
-            @apply ring-2 ring-error-1-default border-2 border-solid border-transparent bg-error-1-default text-neutral-10-default;
-            @apply hover:bg-error-1-hover hover:ring-error-1-hover;
-            @apply focus:bg-error-1-default focus:border-neutral-100 focus:ring-neutral-0;
-            @apply active:bg-error-1-press active:ring-error-1-press active:border-error-1-press;
-        }
-
-        &.filled[disabled] {
-            @apply bg-error-1-disable text-neutral-10-default border-neutral-2-disable ring-neutral-2-disable;
-        }
-
-        &.outlined {
-            @apply border-2 border-transparent bg-transparent text-error-1-default ring-1 ring-error-1-default;
-            @apply hover:bg-error-1-default/10 hover:text-error-1-hover;
-            @apply focus:bg-transparent focus:text-error-1-default focus:ring-2 focus:ring-neutral-0;
-            @apply active:bg-error-1-default/15 active:text-error-1-press active:ring-error-1-press active:ring-1;
-        }
-
-        &.ghost {
-            @apply border-2 border-transparent bg-transparent text-error-1-default ring-2 ring-transparent;
-            @apply hover:text-error-1-hover hover:bg-error-1-default/10 hover:ring-transparent;
-            @apply focus:text-error-1-default focus:ring-neutral-0 focus:bg-transparent;
-            @apply active:text-error-1-press active:ring-transparent active:bg-error-1-default/15;
-        }
-
-        &.outlined[disabled],
-        &.ghost[disabled] {
-            @apply bg-transparent border-transparent ring-transparent text-brand-1-disable;
-        }
-    }
-
-    & .prepend-icon {
+    &__prepend-icon {
         @apply size-5;
 
         .size-xs {
@@ -136,7 +147,7 @@
         }
     }
 
-    & .append-icon {
+    &__append-icon {
         @apply size-5;
 
         .size-xs {

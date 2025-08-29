@@ -2,8 +2,11 @@ import './Button.css';
 import { Button as BaseButton } from '@headlessui/react';
 import { clsx } from 'clsx';
 import type { ButtonProps } from '../../types/button.ts';
-import { forwardRef, useMemo } from 'react';
-import { Icon } from '../Icon/Icon.tsx';
+import { forwardRef } from 'react';
+import { Icon, IconProps } from '../Icon/Icon.tsx';
+import { Spinner } from '../Spinner/Spinner.tsx';
+import useClassNames from '../../hooks/useClassName.ts';
+import { iconsMap } from '../../constants/icons-map.ts';
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     (
@@ -25,22 +28,32 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         }: ButtonProps,
         ref,
     ) => {
-        const buttonClasses = useMemo(() => {
-            return clsx(
-                'button',
-                color,
-                variant,
-                `size-${size}`,
-                {
-                    'w-full': block,
-                },
-                className,
-            );
-        }, [color, variant, size, block, disabled, loading, className]);
+        const bemClass = useClassNames('button');
+
+        const IconAttachment = (icon: ButtonProps['prependIcon'] | ButtonProps['appendIcon']) => {
+            if (typeof icon === 'string' && !!iconsMap[icon as IconProps['name']]) {
+                return (
+                    <div className={clsx(bemClass('prepend-icon'))}>
+                        <Icon name={icon as IconProps['name']} size="lg" />
+                    </div>
+                );
+            }
+
+            return <div className={clsx(bemClass('prepend-icon'))}>{icon}</div>;
+        }
 
         return (
             <BaseButton
-                className={buttonClasses}
+                className={clsx(
+                    bemClass(),
+                    bemClass('color', color),
+                    bemClass('variant', variant),
+                    bemClass('size', size),
+                    {
+                        'w-full': block,
+                    },
+                    className,
+                )}
                 disabled={disabled}
                 type={type}
                 ref={ref}
@@ -50,19 +63,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             >
                 {
                     loading
-                        ? <Icon name="circle-loading" size="md" className="animate-spin" />
+                        ? <Spinner direction="row" size="md" classNameIcon={clsx({ '!text-neutral-10-default': color === 'primary' })} />
                         : <>
-                            {prependIcon && (
-                                <div className={clsx('prepend-icon')}>
-                                    {prependIcon}
-                                </div>
-                            )}
+                            {prependIcon && IconAttachment(prependIcon)}
                             {children}
-                            {appendIcon && (
-                                <div className="append-icon">
-                                    {appendIcon}
-                                </div>
-                            )}
+                            {appendIcon && IconAttachment(appendIcon)}
                         </>
                 }
             </BaseButton>

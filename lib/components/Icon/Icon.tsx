@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { iconsMap } from '../../constants/icons-map';
 import clsx from 'clsx';
 
-type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
 
 export interface IconProps {
     name: keyof typeof iconsMap;
@@ -22,11 +22,13 @@ export const Icon: React.FC<IconProps> = ({
         switch (size) {
             case 'xs': return 'w-2 h-2';
             case 'sm': return 'w-3 h-3';
-            case 'md': return 'w-6 h-6';
-            case 'lg': return 'w-8 h-8';
-            case 'xl': return 'w-10 h-10';
-            case '2xl': return 'w-12 h-12';
-            case '3xl': return 'w-14 h-14';
+            case 'md': return 'w-4 h-4';
+            case 'lg': return 'w-5 h-5';
+            case 'xl': return 'w-6 h-6';
+            case '2xl': return 'w-8 h-8';
+            case '3xl': return 'w-10 h-10';
+            case '4xl': return 'w-12 h-12';
+            case '5xl': return 'w-14 h-14';
             default: return 'w-6 h-6';
         }
     }, [size]);
