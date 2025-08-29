@@ -1,12 +1,42 @@
 .spinner {
-    @apply flex;
+    @apply flex gap-2 justify-center items-center;
 
-    &__icon {
-        animation: spin 1s linear infinite;
+    &__direction--column {
+        @apply flex-col;
+    }
+
+
+    &__icon--svg {
+        animation: spin 1s cubic-bezier(0.27, 0.55, 0.78, 0.58) infinite;
+        @apply text-neutral-1-default;
     }
 
     &__content {
-        @apply text-neutral-0;
+        @apply text-neutral-2-default;
+
+        &--xs {
+            @apply text-caption-c1;
+        }
+
+        &--sm {
+            @apply text-body-b2;
+        }
+
+        &--md {
+            @apply text-body-b2;
+        }
+
+        &--lg {
+            @apply text-body-b1;
+        }
+
+        &--xl {
+            @apply text-body-b1;
+        }
+
+        &--2xl {
+            @apply text-title-t3;
+        }
     }
 }
 
