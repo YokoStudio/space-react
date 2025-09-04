@@ -400,7 +400,7 @@ if [[ $is_committing == true ]]; then
         ;;
       4)
         echo -e "\nTagging $version_in_progress ..."
-        git tag -a $version_in_progress -m "v$version_in_progress"
+        git tag -a $version_in_progress -m "$version_in_progress"
         ;;
       5)
         echo -e "\nPushing $version_in_progress to remote ..."
