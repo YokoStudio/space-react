@@ -1,7 +1,15 @@
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, ReactNode } from 'react';
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+type InputSize = 'sm' | 'md' | 'lg';
+
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange'> {
     placeholder?: string;
     error?: boolean;
     disabled?: boolean;
+    actionButton?: ReactNode;
+    prependIcon?: ReactNode;
+    size?: InputSize;
+    clearButton?: boolean;
+    loading?: boolean;
+    onChange?: (value: string) => void;
 }
