@@ -1,0 +1,277 @@
+name: NPM Publish
+
+on:
+  # Trigger on version tags (e.g., v1.0.0, v1.0.0-beta.1)
+  push:
+    tags:
+      - 'release/*'
+  
+  # Manual dispatch for testing or special releases
+  workflow_dispatch:
+    inputs:
+      publish_type:
+        description: 'Type of publish to perform'
+        required: true
+        default: 'normal'
+        type: choice
+        options:
+          - normal
+          - beta
+      version:
+        description: 'Version to publish (leave empty for auto-detection)'
+        required: false
+        type: string
+
+env:
+  NODE_VERSION: '18'
+  REGISTRY_URL: 'https://registry.npmjs.org'
+
+jobs:
+  # Job to determine publish type and version
+  determine-publish:
+    runs-on: ubuntu-latest
+    outputs:
+      publish-type: ${{ steps.determine.outputs.publish-type }}
+      version: ${{ steps.determine.outputs.version }}
+      is-beta: ${{ steps.determine.outputs.is-beta }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine publish type and version
+        id: determine
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # Manual dispatch
+            echo "publish-type=${{ github.event.inputs.publish_type }}" >> $GITHUB_OUTPUT
+            if [ -n "${{ github.event.inputs.version }}" ]; then
+              echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+            else
+              # Get version from package.json
+              VERSION=$(node -p "require('./package.json').version")
+              echo "version=$VERSION" >> $GITHUB_OUTPUT
+            fi
+            if [ "${{ github.event.inputs.publish_type }}" = "beta" ]; then
+              echo "is-beta=true" >> $GITHUB_OUTPUT
+            else
+              echo "is-beta=false" >> $GITHUB_OUTPUT
+            fi
+          elif [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            # Tag push
+            TAG_NAME=${GITHUB_REF#refs/tags/}
+            echo "version=$TAG_NAME" >> $GITHUB_OUTPUT
+            
+            if [[ "$TAG_NAME" == *"-beta"* ]] || [[ "$TAG_NAME" == *"-alpha"* ]] || [[ "$TAG_NAME" == *"-rc"* ]]; then
+              echo "publish-type=beta" >> $GITHUB_OUTPUT
+              echo "is-beta=true" >> $GITHUB_OUTPUT
+            else
+              echo "publish-type=normal" >> $GITHUB_OUTPUT
+              echo "is-beta=false" >> $GITHUB_OUTPUT
+            fi
+          elif [[ "${{ github.ref }}" == refs/heads/release/* ]] || [[ "${{ github.ref }}" == refs/heads/hotfix/* ]]; then
+            # Branch push (release/* or hotfix/*)
+            BRANCH_NAME=${GITHUB_REF#refs/heads/}
+            echo "Branch: $BRANCH_NAME" >> $GITHUB_OUTPUT
+            
+            # Get version from package.json
+            VERSION=$(node -p "require('./package.json').version")
+            echo "version=v$VERSION" >> $GITHUB_OUTPUT
+            
+            # Determine publish type based on branch
+            if [[ "$BRANCH_NAME" == release/* ]]; then
+              echo "publish-type=normal" >> $GITHUB_OUTPUT
+              echo "is-beta=false" >> $GITHUB_OUTPUT
+            elif [[ "$BRANCH_NAME" == hotfix/* ]]; then
+              echo "publish-type=normal" >> $GITHUB_OUTPUT
+              echo "is-beta=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+  # Build and test job
+  build-and-test:
+    runs-on: ubuntu-latest
+    needs: determine-publish
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run linting
+        run: yarn lint
+
+      - name: Build library
+        run: yarn build:lib
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: dist/
+          retention-days: 1
+
+  # Normal publish job
+  publish-normal:
+    runs-on: ubuntu-latest
+    needs: [determine-publish, build-and-test]
+    if: needs.determine-publish.outputs.publish-type == 'normal'
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: ${{ env.REGISTRY_URL }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-files
+          path: dist/
+
+      - name: Configure npm for publishing
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+          echo "@yokostudio:registry=https://registry.npmjs.org/" >> ~/.npmrc
+
+      - name: Update package.json version
+        run: |
+          VERSION="${{ needs.determine-publish.outputs.version }}"
+          # Remove 'v' prefix if present
+          VERSION=${VERSION#v}
+          npm version $VERSION --no-git-tag-version
+
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ needs.determine-publish.outputs.version }}
+          release_name: Release ${{ needs.determine-publish.outputs.version }}
+          body: |
+            ## Changes in ${{ needs.determine-publish.outputs.version }}
+            
+            This release includes the latest updates to the @yokostudio/space-react component library.
+            
+            ### Installation
+            ```bash
+            npm install @yokostudio/space-react@${{ needs.determine-publish.outputs.version }}
+            ```
+            
+            ### Documentation
+            - [Storybook Documentation](https://yokostudio.github.io/space-react/)
+            - [GitHub Repository](https://github.com/yokostudio/space-react)
+          draft: false
+          prerelease: false
+
+  # Beta publish job
+  publish-beta:
+    runs-on: ubuntu-latest
+    needs: [determine-publish, build-and-test]
+    if: needs.determine-publish.outputs.publish-type == 'beta'
+    environment: beta
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: ${{ env.REGISTRY_URL }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-files
+          path: dist/
+
+      - name: Configure npm for publishing
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+          echo "@yokostudio:registry=https://registry.npmjs.org/" >> ~/.npmrc
+
+      - name: Update package.json version
+        run: |
+          VERSION="${{ needs.determine-publish.outputs.version }}"
+          # Remove 'v' prefix if present
+          VERSION=${VERSION#v}
+          npm version $VERSION --no-git-tag-version
+
+      - name: Publish beta to npm
+        run: npm publish --tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Pre-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ needs.determine-publish.outputs.version }}
+          release_name: Beta Release ${{ needs.determine-publish.outputs.version }}
+          body: |
+            ## Beta Release ${{ needs.determine-publish.outputs.version }}
+            
+            This is a beta release of the @yokostudio/space-react component library.
+            
+            ⚠️ **Warning**: This is a pre-release version and may contain bugs or incomplete features.
+            
+            ### Installation
+            ```bash
+            npm install @yokostudio/space-react@beta
+            # or
+            npm install @yokostudio/space-react@${{ needs.determine-publish.outputs.version }}
+            ```
+            
+            ### Documentation
+            - [Storybook Documentation](https://yokostudio.github.io/space-react/)
+            - [GitHub Repository](https://github.com/yokostudio/space-react)
+            
+            ### Feedback
+            Please report any issues or provide feedback on this beta release.
+          draft: false
+          prerelease: true
+
+  # Notification job
+  notify:
+    runs-on: ubuntu-latest
+    needs: [determine-publish, publish-normal, publish-beta]
+    if: always() && (needs.publish-normal.result == 'success' || needs.publish-beta.result == 'success')
+    steps:
+      - name: Notify success
+        run: |
+          echo "✅ Successfully published ${{ needs.determine-publish.outputs.version }} to npm!"
+          echo "Publish type: ${{ needs.determine-publish.outputs.publish-type }}"
+          if [ "${{ needs.determine-publish.outputs.publish-type }}" = "beta" ]; then
+            echo "Install with: npm install @yokostudio/space-react@beta"
+          else
+            echo "Install with: npm install @yokostudio/space-react@${{ needs.determine-publish.outputs.version }}"
+          fi

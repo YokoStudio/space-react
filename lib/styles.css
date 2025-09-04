@@ -1,0 +1,18 @@
+/* Import all component styles */
+@import './components/Badge/Badge.css';
+@import './components/Button/Button.css';
+@import './components/Input/Input.css';
+@import './components/Tab/Tab.css';
+@import './components/Switch/Switch.css';
+@import './components/Slider/Slider.css';
+@import './components/Divider/Divider.css';
+@import './components/Textarea/Textarea.css';
+@import './components/RadioGroup/RadioGroup.css';
+@import './components/Field/Field.css';
+@import './components/Checkbox/Checkbox.css';
+@import './components/Dropdown/Dropdown.css';
+@import './components/Tooltip/Tooltip.css';
+@import './components/Icon/Icon.css';
+
+/* Import base styles */
+@import './index.css';

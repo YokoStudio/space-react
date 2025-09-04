@@ -9,3 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Button component added.
 - Input component added.
+- Textarea component added.
+- Field component added.
+- Dropdown component added.
+- Divider component added.
+- Checkbox component added.
+- Badge component added.
+- RadioGroup component added.
+- Slider component added.
+- Spinner component added.
+- Tab component added.
+- Tooltip component added.

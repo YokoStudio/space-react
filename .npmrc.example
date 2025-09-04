@@ -1,0 +1,16 @@
+# NPM Configuration Template for @yokostudio organization
+# Copy this file to .npmrc and replace YOUR_ACCESS_TOKEN with your actual token
+
+# Registry URL (default npm registry)
+registry=https://registry.npmjs.org/
+
+# Authentication token for @yokostudio organization
+# Replace YOUR_ACCESS_TOKEN with your actual npm access token
+//registry.npmjs.org/:_authToken=${NPM_TOKEN}
+
+# Organization scope configuration
+@yokostudio:registry=https://registry.npmjs.org/
+
+# Optional: Configure for specific scopes
+# @yokostudio:registry=https://registry.npmjs.org/
+# @yokostudio:always-auth=true
