@@ -1,10 +1,48 @@
-.input {
-    @apply h-8 text-neutral-2-default border border-neutral-6-default border-solid py-1 px-2 rounded text-body-b1 transition-all duration-200 ease-in-out outline-transparent outline placeholder:text-neutral-2-disable;
-    @apply hover:border-neutral-6-hover;
-    @apply focus:border-neutral-focus-dark focus:outline-neutral-focus-dark;
-    @apply disabled:text-neutral-1-disable disabled:border-neutral-2-disable disabled:bg-neutral-1-disable;
+.text-input {
+    @apply flex items-center gap-2;
+    @apply text-neutral-2-default border border-neutral-6-default border-solid py-1 px-2 rounded text-body-b1 transition-all duration-200 ease-in-out outline-transparent outline placeholder:text-neutral-2-disable;
 
-    &.error {
+    &__input {
+        @apply focus:outline-none focus:border-none;
+        @apply text-body-b1 placeholder:text-body-b1;
+        @apply shrink;
+    }
+
+    &[data-hover] {
+        @apply border-neutral-6-hover;
+    }
+
+    &[data-disabled] {
+        @apply text-neutral-1-disable border-neutral-2-disable bg-neutral-1-disable;
+    }
+
+    &[data-focus] {
+        @apply border-neutral-focus-dark outline-neutral-focus-dark;
+    }
+
+    &__size {
+        &--sm {
+            @apply py-1;
+        }
+
+        &--md {
+            @apply py-2;
+        }
+
+        &--lg {
+            @apply py-3;
+        }
+    }
+
+    &__action-box {
+        @apply h-6 w-0 flex justify-center items-center transition-all duration-200 ease-in-out;
+
+        &[data-active="true"] {
+            @apply w-6;
+        }
+    }
+
+    &--error {
         @apply border-error-1-default;
     }
 }
