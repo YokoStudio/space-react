@@ -418,8 +418,8 @@ if [[ $is_committing == true ]]; then
         fi
         ;;
       7)
-        echo -e "\nCreating pull request from $release_branch to main..."
-        create_pull_request $release_branch main
+        echo -e "\nCreating pull request from $release_branch to dev..."
+        create_pull_request $release_branch dev
         if (( $? != 0 )); then
           exit 1
         fi
@@ -456,12 +456,12 @@ fi
 if [[ $is_hotfix == false ]]; then
   echo "Preparing a new version..."
 
-  # 1. Make sure we are on main, and then pull the latest changes
+  # 1. Make sure we are on dev, and then pull the latest changes
   echo -e "\nFetching latest changes ..."
-  git checkout main
+  git checkout dev
 
   if ! git pull; then
-    echo -e "\n${RED}[Err] Failed to pull from main branch.\n${NC}"
+    echo -e "\n${RED}[Err] Failed to pull from dev branch.\n${NC}"
     exit 1
   fi
 
