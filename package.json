@@ -1,16 +1,53 @@
 {
-  "name": "space-react",
-  "private": true,
+  "name": "@yokostudio/space-react",
+  "private": false,
   "version": "0.1.1",
   "type": "module",
+  "description": "A React component library for space-themed UI components",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": "./dist/index.css"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yokostudio/space-react.git"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "library",
+    "space",
+    "tailwind"
+  ],
+  "author": "Mahdi Hasani <mahdi.hssni@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:lib": "tsc -b && vite build --mode library",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o ./docs --docs",
-    "chromatic": "npx chromatic --project-token=chpt_1ab15b8e62b4580"
+    "chromatic": "npx chromatic --project-token=chpt_1ab15b8e62b4580",
+    "prepublishOnly": "npm run build:lib",
+    "publish:patch": "npm version patch && npm publish",
+    "publish:minor": "npm version minor && npm publish",
+    "publish:major": "npm version major && npm publish"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.5",
@@ -29,6 +66,7 @@
     "@storybook/addon-docs": "^9.1.2",
     "@storybook/addon-onboarding": "^9.1.2",
     "@storybook/react-vite": "^9.1.2",
+    "@types/node": "^24.3.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@typescript-eslint/eslint-plugin": "^8.17.0",

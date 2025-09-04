@@ -1,50 +1,86 @@
-# React + TypeScript + Vite
+# @yokostudio/space-react
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React component library with space-themed UI components built with TypeScript and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm install @yokostudio/space-react
+# or
+yarn add @yokostudio/space-react
+# or
+pnpm add @yokostudio/space-react
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Usage
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Basic Setup
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```tsx
+import React from 'react';
+import { Button, Input, Badge } from '@yokostudio/space-react';
+import '@yokostudio/space-react/styles';
+
+function App() {
+  return (
+    <div>
+      <Button>Click me</Button>
+      <Input placeholder="Enter text..." />
+      <Badge variant="primary">New</Badge>
+    </div>
+  );
+}
 ```
+
+### Individual Component Imports
+
+```tsx
+import { Button } from '@yokostudio/space-react';
+import '@yokostudio/space-react/styles';
+```
+
+## Components
+
+- **Badge** - Status indicators and labels
+- **Button** - Interactive buttons with various styles
+- **Input** - Text input fields
+- **Textarea** - Multi-line text input
+- **Checkbox** - Checkbox inputs
+- **RadioGroup** - Radio button groups
+- **Switch** - Toggle switches
+- **Slider** - Range sliders
+- **Dropdown** - Dropdown menus
+- **Field** - Form field wrapper
+- **Tab** - Tab navigation
+- **Divider** - Visual separators
+- **Tooltip** - Contextual tooltips
+- **Icon** - SVG icons
+
+## Requirements
+
+- React 18.3.1 or higher
+- TypeScript (for type definitions)
+
+## Styling
+
+This library uses Tailwind CSS for styling. Make sure you have Tailwind CSS configured in your project, or import the styles:
+
+```tsx
+import '@yokostudio/space-react/styles';
+```
+
+## TypeScript Support
+
+This library is built with TypeScript and includes full type definitions.
+
+## License
+
+MIT
+
+## Contributing
+
+Contributions are welcome! Please read our contributing guidelines.
+
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) for a list of changes.
