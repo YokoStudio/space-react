@@ -1,0 +1,1 @@
+import{r as e,R as o}from"./iframe-DYtV9SfR.js";let t=e.createContext(void 0);function c(){return e.useContext(t)}function u({value:r,children:n}){return o.createElement(t.Provider,{value:r},n)}export{c as a,u as l};
