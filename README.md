@@ -54,7 +54,6 @@ import '@yokostudio/space-react/styles';
 - **Tab** - Tab navigation
 - **Divider** - Visual separators
 - **Tooltip** - Contextual tooltips
-- **Icon** - SVG icons
 
 ## Requirements
 

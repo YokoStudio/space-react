@@ -11,6 +11,9 @@ src/
 *.log
 *.tmp
 *.temp
+.versionrc
+.versionrc-example
+version.sh
 
 # Build artifacts (except dist)
 build/
@@ -55,3 +58,5 @@ vitest.config.*
 # Other
 yarn.lock
 package-lock.json
+
+
