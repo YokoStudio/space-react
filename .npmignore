@@ -1,0 +1,57 @@
+# Source files
+lib/
+src/
+*.ts
+*.tsx
+!*.d.ts
+
+# Development files
+.vscode/
+.idea/
+*.log
+*.tmp
+*.temp
+
+# Build artifacts (except dist)
+build/
+coverage/
+.nyc_output/
+
+# Dependencies
+node_modules/
+
+# Development tools
+.eslintrc*
+.prettierrc*
+tsconfig*.json
+vite.config.ts
+postcss.config.js
+tailwind.config.js
+
+# Storybook
+.storybook/
+docs/
+storybook-static/
+
+# Git
+.git/
+.gitignore
+
+# Environment files
+.env*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Testing
+__tests__/
+*.test.*
+*.spec.*
+jest.config.*
+vitest.config.*
+
+# Other
+yarn.lock
+package-lock.json
