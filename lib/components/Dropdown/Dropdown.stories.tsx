@@ -121,6 +121,7 @@ export const Default: Story = {
         error: false,
         disabled: false,
         multiple: false,
+        children: [],
         onChange(value) {
             action('onChange')(value);
         },

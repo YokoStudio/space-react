@@ -3,7 +3,7 @@ import { Children, isValidElement, ReactNode } from 'react';
 import { Input } from '../Input/Input.tsx';
 import { clsx } from 'clsx';
 
-enum FieldMode {
+export enum FieldMode {
     Normal = 'normal',
     Compact = 'compact',
 }

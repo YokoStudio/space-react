@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { Field } from './Field';
+import { Field, FieldMode } from './Field';
 import { Input } from '../Input/Input.tsx';
 
 const meta = {
@@ -29,6 +29,6 @@ export const Default: Story = {
         label: 'Email Address',
         required: true,
         message: 'Enter valid email',
-        mode: 'compact',
+        mode: FieldMode.Compact,
     },
 };
