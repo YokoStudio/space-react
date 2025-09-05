@@ -41,5 +41,8 @@ export const Default: Story = {
             },
         ],
         mode: TabMode.Filled,
+        onChange: (index) => {
+            console.log('Selected tab index:', index);
+        },
     },
 };

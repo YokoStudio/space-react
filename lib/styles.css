@@ -8,11 +8,9 @@
 @import './components/Divider/Divider.css';
 @import './components/Textarea/Textarea.css';
 @import './components/RadioGroup/RadioGroup.css';
-@import './components/Field/Field.css';
 @import './components/Checkbox/Checkbox.css';
 @import './components/Dropdown/Dropdown.css';
-@import './components/Tooltip/Tooltip.css';
-@import './components/Icon/Icon.css';
+@import './components/Spinner/style.css';
 
 /* Import base styles */
 @import './index.css';

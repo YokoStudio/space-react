@@ -19,7 +19,13 @@ export const Slider = (props: SliderProps) => {
             Math.max(Number(e.target.value), props.min),
             props.max,
         );
-        props.onChange({ ...e, target: { ...e.target, value: newValue } });
+        props.onChange({
+            ...e,
+            target: {
+                ...e.target,
+                value: newValue.toString(),
+            } as HTMLInputElement,
+        });
     };
 
     const Component = modes[mode];
