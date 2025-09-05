@@ -4,6 +4,6 @@ import CrossCircle from '../icons/cross-circle.svg?react';
 
 export const iconsMap = {
     'circle-loading': CircleLoading,
-    'search': Search,
+    search: Search,
     'cross-circle': CrossCircle,
 };
