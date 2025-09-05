@@ -7,13 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.0-beta.3](https://github.com/yokostudio/space-react/releases/tag/0.1.0-beta.3) <sub>/ 2025-09-06</sub>
-
-## [0.1.0-beta.2](https://github.com/yokostudio/space-react/releases/tag/0.1.0-beta.2) <sub>/ 2025-09-05</sub>
-
-## [0.1.0-beta.1](https://github.com/yokostudio/space-react/releases/tag/0.1.0-beta.1) <sub>/ 2025-09-05</sub>
-
-## [0.3.0](https://github.com/yokostudio/space-react/releases/tag/0.3.0) <sub>/ 2025-09-05</sub>
+## [0.1.0-beta.4](https://github.com/yokostudio/space-react/releases/tag/0.1.0-beta.4) <sub>/ 2025-09-06</sub>
 ### Added
 - Button component added.
 - Input component added.

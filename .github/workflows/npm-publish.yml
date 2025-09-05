@@ -151,13 +151,6 @@ jobs:
           echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
           echo "@yokostudio:registry=https://registry.npmjs.org/" >> ~/.npmrc
 
-      - name: Update package.json version
-        run: |
-          VERSION="${{ needs.determine-publish.outputs.version }}"
-          # Remove 'v' prefix if present
-          VERSION=${VERSION#v}
-          npm version $VERSION --no-git-tag-version
-
       - name: Publish to npm
         run: npm publish
         env:
@@ -217,13 +210,6 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
           echo "@yokostudio:registry=https://registry.npmjs.org/" >> ~/.npmrc
-
-      - name: Update package.json version
-        run: |
-          VERSION="${{ needs.determine-publish.outputs.version }}"
-          # Remove 'v' prefix if present
-          VERSION=${VERSION#v}
-          npm version $VERSION --no-git-tag-version
 
       - name: Publish beta to npm
         run: npm publish --tag beta
