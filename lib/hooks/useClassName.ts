@@ -1,4 +1,6 @@
-export default function useClassName(block: string): (element?: string, modifier?: string) => string {
+export default function useClassName(
+    block: string,
+): (element?: string, modifier?: string) => string {
     return function (element?: string, modifier?: string) {
         let className = block;
 
@@ -9,5 +11,5 @@ export default function useClassName(block: string): (element?: string, modifier
             className += `--${modifier}`;
         }
         return className;
-    }
+    };
 }

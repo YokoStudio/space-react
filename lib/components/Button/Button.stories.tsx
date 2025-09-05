@@ -141,19 +141,37 @@ export const AllVariants: Story = {
     render: () => (
         <div className="flex flex-col gap-4">
             <div className="flex gap-2">
-                <Button color="primary" variant="filled">Primary Filled</Button>
-                <Button color="primary" variant="outlined">Primary Outlined</Button>
-                <Button color="primary" variant="ghost">Primary Ghost</Button>
+                <Button color="primary" variant="filled">
+                    Primary Filled
+                </Button>
+                <Button color="primary" variant="outlined">
+                    Primary Outlined
+                </Button>
+                <Button color="primary" variant="ghost">
+                    Primary Ghost
+                </Button>
             </div>
             <div className="flex gap-2">
-                <Button color="secondary" variant="filled">Secondary Filled</Button>
-                <Button color="secondary" variant="outlined">Secondary Outlined</Button>
-                <Button color="secondary" variant="ghost">Secondary Ghost</Button>
+                <Button color="secondary" variant="filled">
+                    Secondary Filled
+                </Button>
+                <Button color="secondary" variant="outlined">
+                    Secondary Outlined
+                </Button>
+                <Button color="secondary" variant="ghost">
+                    Secondary Ghost
+                </Button>
             </div>
             <div className="flex gap-2">
-                <Button color="error" variant="filled">Error Filled</Button>
-                <Button color="error" variant="outlined">Error Outlined</Button>
-                <Button color="error" variant="ghost">Error Ghost</Button>
+                <Button color="error" variant="filled">
+                    Error Filled
+                </Button>
+                <Button color="error" variant="outlined">
+                    Error Outlined
+                </Button>
+                <Button color="error" variant="ghost">
+                    Error Ghost
+                </Button>
             </div>
         </div>
     ),

@@ -30,8 +30,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ) => {
         const bemClass = useClassNames('button');
 
-        const IconAttachment = (icon: ButtonProps['prependIcon'] | ButtonProps['appendIcon']) => {
-            if (typeof icon === 'string' && !!iconsMap[icon as IconProps['name']]) {
+        const IconAttachment = (
+            icon: ButtonProps['prependIcon'] | ButtonProps['appendIcon'],
+        ) => {
+            if (
+                typeof icon === 'string' &&
+                !!iconsMap[icon as IconProps['name']]
+            ) {
                 return (
                     <div className={clsx(bemClass('prepend-icon'))}>
                         <Icon name={icon as IconProps['name']} size="lg" />
@@ -40,7 +45,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             }
 
             return <div className={clsx(bemClass('prepend-icon'))}>{icon}</div>;
-        }
+        };
 
         return (
             <BaseButton
@@ -61,15 +66,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 aria-describedby={ariaDescribedby}
                 {...props}
             >
-                {
-                    loading
-                        ? <Spinner direction="row" size="md" classNameIcon={clsx({ '!text-neutral-10-default': color === 'primary' })} />
-                        : <>
-                            {prependIcon && IconAttachment(prependIcon)}
-                            {children}
-                            {appendIcon && IconAttachment(appendIcon)}
-                        </>
-                }
+                {loading ? (
+                    <Spinner
+                        direction="row"
+                        size="md"
+                        classNameIcon={clsx({
+                            '!text-neutral-10-default': color === 'primary',
+                        })}
+                    />
+                ) : (
+                    <>
+                        {prependIcon && IconAttachment(prependIcon)}
+                        {children}
+                        {appendIcon && IconAttachment(appendIcon)}
+                    </>
+                )}
             </BaseButton>
         );
     },
