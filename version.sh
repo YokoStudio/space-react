@@ -400,19 +400,19 @@ if [[ $is_committing == true ]]; then
         ;;
       4)
         echo -e "\nTagging $version_in_progress ..."
-        git tag -a "release/$version_in_progress" -m "$version_in_progress"
+        git tag -a "v$version_in_progress" -m "v$version_in_progress"
         ;;
       5)
-        echo -e "\nPushing release/$version_in_progress to remote ..."
-        git push origin "release/$version_in_progress"
+        echo -e "\nPushing v$version_in_progress to remote ..."
+        git push origin "v$version_in_progress"
         if (( $? != 0 )); then
-          echo " [Err] Unable to push release/$version_in_progress tag to remote!"
+          echo " [Err] Unable to push v$version_in_progress tag to remote!"
           exit 1
         fi
         ;;
       6)
-        echo -e "\nUpdate release notes for release/$version_in_progress ..."
-        update_release_note "release/$version_in_progress"
+        echo -e "\nUpdate release notes for v$version_in_progress ..."
+        update_release_note "v$version_in_progress"
         if (( $? != 0 )); then
           exit 1
         fi
@@ -428,7 +428,7 @@ if [[ $is_committing == true ]]; then
     progress=$(($progress+1))
   done
 
-  declare -r workflow_url=$(get_workflow_url_for_tag "release/$version_in_progress")
+  declare -r workflow_url=$(get_workflow_url_for_tag "v$version_in_progress")
 
   if [[ ! -z $workflow_url && $workflow_url != 'null' ]]; then
     if [[ ! -z $LINK_OPENER ]]; then
