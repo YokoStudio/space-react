@@ -1,7 +1,7 @@
 name: NPM Publish
 
 on:
-  # Trigger on version tags (e.g., v1.0.0, v1.0.0-beta.1)
+  # Trigger on version tags (e.g., release/1.0.0, release/1.0.0-beta.1)
   push:
     tags:
       - 'release/*'
