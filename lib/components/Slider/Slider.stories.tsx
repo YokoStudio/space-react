@@ -19,7 +19,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-    render: function Render({ value, onChange: _, ...props }) {
+    render: function Render({ value, onChange: _onChange, ...props }) {
         const [_value, setValue] = useState(value);
 
         useEffect(() => {
@@ -29,7 +29,10 @@ export const Default: Story = {
         return (
             <Slider
                 value={_value}
-                onChange={(e) => setValue(Number(e.target.value))}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setValue(Number(e.target.value));
+                    _onChange?.(e);
+                }}
                 {...props}
             />
         );

@@ -7,13 +7,18 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 import prettierPlugin from 'eslint-plugin-prettier';
 
 export default tseslint.config(
-    { ignores: ['dist'] },
+    { ignores: ['dist', 'docs', 'node_modules'] },
     {
         extends: [js.configs.recommended, ...tseslint.configs.recommended],
         files: ['**/*.{ts,tsx}'],
         languageOptions: {
             ecmaVersion: 2020,
             globals: globals.browser,
+            parserOptions: {
+                ecmaFeatures: {
+                    jsx: true,
+                },
+            },
         },
         plugins: {
             'react-hooks': reactHooks,
@@ -34,7 +39,9 @@ export default tseslint.config(
                     allowTaggedTemplates: true,
                 },
             ],
-            'prettier/prettier': 'warn',
+            '@typescript-eslint/no-explicit-any': 'warn',
+            '@typescript-eslint/no-unused-vars': 'warn',
+            'prettier/prettier': 'error',
         },
     },
     eslintConfigPrettier,

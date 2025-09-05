@@ -1,10 +1,5 @@
 import { WarningCircle } from './icons/warning-circle.tsx';
-import {
-    Children,
-    isValidElement,
-    JSXElementConstructor,
-    ReactNode,
-} from 'react';
+import { Children, isValidElement, ReactNode } from 'react';
 import { Input } from '../Input/Input.tsx';
 import { clsx } from 'clsx';
 
@@ -30,14 +25,17 @@ export const Field = ({
     mode,
     className,
 }: FieldProps) => {
-    const validChildren: (JSXElementConstructor<any> | string)[] = [Input];
+    const validChildren = [Input] as const;
 
     const children = Children.map(_children, (child) => {
-        if (isValidElement(child) && validChildren.includes(child.type)) {
+        if (
+            isValidElement(child) &&
+            validChildren.includes(child.type as (typeof validChildren)[number])
+        ) {
             return child;
         }
         console.warn('Invalid child type:', child);
-        return null;
+        return child;
     });
 
     return (
