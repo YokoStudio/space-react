@@ -1,7 +1,7 @@
 import './Tab.css';
 import { clsx } from 'clsx';
 import { TabGroup, TabList, Tab as BaseTab } from '@headlessui/react';
-import { TabMode, TabProps } from '../../types/tab.ts';
+import { TabMode, TabProps } from '../../types/tab';
 
 export const Tab = ({
     className,

@@ -1,6 +1,6 @@
 import './Slider.css';
 import React, { useState, useEffect, useRef } from 'react';
-import { SliderProps } from '../../types/slider.ts';
+import { SliderProps } from '../../types/slider';
 
 export const Slider = (props: SliderProps) => {
     const modes = {

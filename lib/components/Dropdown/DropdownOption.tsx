@@ -1,9 +1,9 @@
-import { DropdownOptionProp } from '../../types/dropdown.ts';
+import { DropdownOptionProp } from '../../types/dropdown';
 import { ListboxOption } from '@headlessui/react';
-import { Checkbox } from '../Checkbox/Checkbox.tsx';
-import { CheckIcon } from './icons/Check.tsx';
+import { Checkbox } from '../Checkbox/Checkbox';
+import { CheckIcon } from './icons/Check';
 import { useRef } from 'react';
-import { useDropdownContext } from './context.ts';
+import { useDropdownContext } from './context';
 
 export function DropdownOption<T>({
     label,

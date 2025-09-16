@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import { useRef, useState } from 'react';
-import { TooltipProps } from '../../types/tooltip.ts';
+import { TooltipProps } from '../../types/tooltip';
 import {
     useFloating,
     useHover,

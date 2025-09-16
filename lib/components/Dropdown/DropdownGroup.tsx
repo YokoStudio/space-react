@@ -1,4 +1,4 @@
-import { DropdownGroupProp } from '../../types/dropdown.ts';
+import { DropdownGroupProp } from '../../types/dropdown';
 import { ListboxOption } from '@headlessui/react';
 
 export function DropdownGroup({ label }: DropdownGroupProp) {
