@@ -2,34 +2,30 @@
 import './styles.css';
 
 // Export all components
-export { Badge, BadgeType, BadgeVariant } from './components/Badge/Badge.tsx';
-export type { BadgeProps } from './components/Badge/Badge.tsx';
+export { Badge, BadgeType, BadgeVariant } from './components/Badge/Badge';
 
-export { Button } from './components/Button/Button.tsx';
+export { Button } from './components/Button/Button';
 
-export { Input } from './components/Input/Input.tsx';
+export { Input } from './components/Input/Input';
 
-export { Tab } from './components/Tab/Tab.tsx';
+export { Tab } from './components/Tab/Tab';
 
-export { Switch } from './components/Switch/Switch.tsx';
+export { Switch } from './components/Switch/Switch';
 
-export { Slider } from './components/Slider/Slider.tsx';
+export { Slider } from './components/Slider/Slider';
 
-export { Divider, DividerPosition } from './components/Divider/Divider.tsx';
-export type { DividerProps } from './components/Divider/Divider.tsx';
+export { Divider, DividerPosition } from './components/Divider/Divider';
 
-export { Textarea } from './components/Textarea/Textarea.tsx';
-export type { TextareaProps } from './components/Textarea/Textarea.tsx';
+export { Textarea } from './components/Textarea/Textarea';
 
-export { RadioGroup } from './components/RadioGroup/RadioGroup.tsx';
+export { RadioGroup } from './components/RadioGroup/RadioGroup';
 
-export { Field } from './components/Field/Field.tsx';
+export { Field } from './components/Field/Field';
 
-export { Checkbox } from './components/Checkbox/Checkbox.tsx';
-export type { CheckboxProps } from './components/Checkbox/Checkbox.tsx';
+export { Checkbox } from './components/Checkbox/Checkbox';
 
-export { Dropdown } from './components/Dropdown/Dropdown.tsx';
-export { DropdownGroup } from './components/Dropdown/DropdownGroup.tsx';
-export { DropdownOption } from './components/Dropdown/DropdownOption.tsx';
+export { Dropdown } from './components/Dropdown/Dropdown';
+export { DropdownGroup } from './components/Dropdown/DropdownGroup';
+export { DropdownOption } from './components/Dropdown/DropdownOption';
 
-export { Tooltip } from './components/Tooltip/Tooltip.tsx';
+export { Tooltip } from './components/Tooltip/Tooltip';

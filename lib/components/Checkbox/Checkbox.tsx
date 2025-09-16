@@ -1,8 +1,8 @@
 import './Checkbox.css';
 import { Checkbox as BaseCheckbox } from '@headlessui/react';
-import { CheckIcon } from './icons/Check.tsx';
+import { CheckIcon } from './icons/Check';
 import { clsx } from 'clsx';
-import { MinusIcon } from './icons/Minus.tsx';
+import { MinusIcon } from './icons/Minus';
 
 export type CheckboxProps = {
     label?: string;

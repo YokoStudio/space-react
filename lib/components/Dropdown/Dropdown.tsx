@@ -5,9 +5,9 @@ import {
     ListboxOptions,
     ListboxSelectedOption,
 } from '@headlessui/react';
-import { AngleDown } from './icons/AngleDown.tsx';
-import { DropdownListPosition, DropdownProps } from '../../types/dropdown.ts';
-import { DropdownContext } from './context.ts';
+import { AngleDown } from './icons/AngleDown';
+import { DropdownListPosition, DropdownProps } from '../../types/dropdown';
+import { DropdownContext } from './context';
 import { useEffect, useState } from 'react';
 
 export function Dropdown<T = unknown>({

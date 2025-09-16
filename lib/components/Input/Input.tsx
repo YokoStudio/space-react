@@ -1,11 +1,11 @@
 import './Input.css';
 import { Input as BaseInput } from '@headlessui/react';
-import type { InputProps } from '../../types/input.ts';
+import type { InputProps } from '../../types/input';
 import { clsx } from 'clsx';
-import useClassNames from '../../hooks/useClassName.ts';
+import useClassNames from '../../hooks/useClassName';
 import { forwardRef, Fragment, useRef, useState } from 'react';
-import { Icon } from '../Icon/Icon.tsx';
-import { Spinner } from '../Spinner/Spinner.tsx';
+import { Icon } from '../Icon/Icon';
+import { Spinner } from '../Spinner/Spinner';
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
     (

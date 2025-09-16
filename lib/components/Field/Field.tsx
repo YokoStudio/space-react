@@ -1,6 +1,6 @@
-import { WarningCircle } from './icons/warning-circle.tsx';
+import { WarningCircle } from './icons/warning-circle';
 import { Children, isValidElement, ReactNode } from 'react';
-import { Input } from '../Input/Input.tsx';
+import { Input } from '../Input/Input';
 import { clsx } from 'clsx';
 
 export enum FieldMode {

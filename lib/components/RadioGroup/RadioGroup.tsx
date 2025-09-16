@@ -1,8 +1,8 @@
 import './RadioGroup.css';
 import { Field, Label, RadioGroup as BaseRadioGroup } from '@headlessui/react';
 import { clsx } from 'clsx';
-import type { RadioGroupProps } from '../../types/radioGroup.ts';
-import { Radio } from '../Radio/Radio.tsx';
+import type { RadioGroupProps } from '../../types/radioGroup';
+import { Radio } from '../Radio/Radio';
 
 export const RadioGroup = ({
     value,

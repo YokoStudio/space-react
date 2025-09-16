@@ -1,12 +1,12 @@
 import './Button.css';
 import { Button as BaseButton } from '@headlessui/react';
 import { clsx } from 'clsx';
-import type { ButtonProps } from '../../types/button.ts';
+import type { ButtonProps } from '../../types/button';
 import { forwardRef } from 'react';
-import { Icon, IconProps } from '../Icon/Icon.tsx';
-import { Spinner } from '../Spinner/Spinner.tsx';
-import useClassNames from '../../hooks/useClassName.ts';
-import { iconsMap } from '../../constants/icons-map.ts';
+import { Icon, IconProps } from '../Icon/Icon';
+import { Spinner } from '../Spinner/Spinner';
+import useClassNames from '../../hooks/useClassName';
+import { iconsMap } from '../../constants/icons-map';
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     (

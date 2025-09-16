@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
                     entry: resolve(__dirname, 'lib/index.ts'),
                     name: 'SpaceReact',
                     fileName: (format) => `index.${format}.js`,
-                    formats: ['es'],
+                    formats: ['es', 'cjs'],
                 },
                 rollupOptions: {
                     external: ['react', 'react-dom'],
