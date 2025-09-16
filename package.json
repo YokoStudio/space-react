@@ -1,7 +1,7 @@
 {
   "name": "@yokostudio/space-react",
   "private": false,
-  "version": "0.1.0-beta.6",
+  "version": "0.1.0-beta.7",
   "type": "module",
   "description": "A React component library for space-themed UI components",
   "main": "./dist/index.es.js",
@@ -63,9 +63,38 @@
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@yokostudio/tailwind-space": "^0.3.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^11.16.4",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "framer-motion": "^11.16.4"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "@headlessui/react": "^2.0.0",
+    "@floating-ui/react": "^0.25.0",
+    "framer-motion": "^10.0.0",
+    "clsx": "^2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    },
+    "react-dom": {
+      "optional": false
+    },
+    "@headlessui/react": {
+      "optional": false
+    },
+    "@floating-ui/react": {
+      "optional": false
+    },
+    "framer-motion": {
+      "optional": false
+    },
+    "clsx": {
+      "optional": false
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^4.1.0",

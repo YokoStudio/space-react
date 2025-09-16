@@ -26,13 +26,26 @@ export default defineConfig(({ mode }) => {
                     formats: ['es', 'cjs'],
                 },
                 rollupOptions: {
-                    external: ['@headlessui/react', '@floating-ui/react', 'framer-motion', 'clsx'],
+                    external: [
+                        'react',
+                        'react-dom',
+                        'react/jsx-runtime',
+                        'react/jsx-dev-runtime',
+                        '@headlessui/react',
+                        '@floating-ui/react',
+                        'framer-motion',
+                        'clsx'
+                    ],
                     output: {
                         globals: {
+                            'react': 'React',
+                            'react-dom': 'ReactDOM',
+                            'react/jsx-runtime': 'React',
+                            'react/jsx-dev-runtime': 'React',
                             '@headlessui/react': 'HeadlessUI',
                             '@floating-ui/react': 'FloatingUI',
                             'framer-motion': 'FramerMotion',
-                            'clsx': 'clsx',
+                            'clsx': 'clsx'
                         },
                     },
                 },

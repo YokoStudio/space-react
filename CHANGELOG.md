@@ -8,12 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [0.1.0-beta.7](https://github.com/yokostudio/space-react/releases/tag/0.1.0-beta.7) <sub>/ 2025-09-16</sub>
-
-## [0.1.0-beta-6](https://github.com/yokostudio/space-react/releases/tag/0.1.0-beta-6) <sub>/ 2025-09-16</sub>
+### Fixed
+- Fixed ReactCurrentDispatcher error by properly externalizing all dependencies.
+- Improved bundle size and dependency management.
 
 ## [0.1.0-beta.5](https://github.com/yokostudio/space-react/releases/tag/0.1.0-beta.5) <sub>/ 2025-09-16</sub>
 ### Fixed
-- Fix components types deceleration.
+- Fixed components types deceleration.
 
 ## [0.1.0-beta.4](https://github.com/yokostudio/space-react/releases/tag/0.1.0-beta.4) <sub>/ 2025-09-06</sub>
 ### Added
