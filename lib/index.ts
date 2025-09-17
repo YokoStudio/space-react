@@ -1,7 +1,6 @@
-// Import styles
+
 import './styles.css';
 
-// Export all components
 export { Badge, BadgeType, BadgeVariant } from './components/Badge/Badge';
 
 export { Button } from './components/Button/Button';
