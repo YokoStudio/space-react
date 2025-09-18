@@ -204,7 +204,9 @@ bump () {
 apply_version_to_repo () {
   declare escaped_version=$(escape_version $1)
   declare version_date=$(date +%F)
-  perl -i -pe 's/"version"\: ".*"/"version"\: "'"$escaped_version"'"/g' package.json
+  # Remove 'v' prefix if present for package.json version
+  declare clean_version=$(echo $escaped_version | sed 's/^v//')
+  perl -i -pe 's/"version"\: ".*"/"version"\: "'"$clean_version"'"/g' package.json
   perl -i -pe 's/## \[Unreleased\]/## \[Unreleased\]\n\n## \['"$escaped_version"'\](https:\/\/github\.com\/'"$REPO_OWNER"'\/'"$REPO_NAME"'\/releases\/tag\/'"$escaped_version"') <sub>\/ '"$version_date"'<\/sub>/g' CHANGELOG.md
 }
 

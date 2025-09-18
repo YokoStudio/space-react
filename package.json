@@ -1,7 +1,7 @@
 {
   "name": "@yokostudio/space-react",
   "private": false,
-  "version": "v0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "description": "A React component library for space-themed UI components",
   "main": "./dist/index.cjs.js",
