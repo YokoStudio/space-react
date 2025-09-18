@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.1.1](https://github.com/yokostudio/space-react/releases/tag/v0.1.1) <sub>/ 2025-09-18</sub>
+### Fixed
+- Fixed deployment Github Action.
+
 ## [0.1.0](https://github.com/yokostudio/space-react/releases/tag/0.1.0) <sub>/ 2025-09-17</sub>
 ### Fixed
 - Fixed ReactCurrentDispatcher error by properly externalizing all dependencies.
