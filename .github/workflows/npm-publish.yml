@@ -22,6 +22,11 @@ on:
         required: false
         type: string
 
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
 env:
   NODE_VERSION: 'lts/iron'
   REGISTRY_URL: 'https://registry.npmjs.org'
@@ -157,12 +162,10 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.determine-publish.outputs.version }}
-          release_name: Release ${{ needs.determine-publish.outputs.version }}
+          name: Release ${{ needs.determine-publish.outputs.version }}
           body: |
             ## Changes in ${{ needs.determine-publish.outputs.version }}
             
@@ -178,6 +181,7 @@ jobs:
             - [GitHub Repository](https://github.com/yokostudio/space-react)
           draft: false
           prerelease: false
+          generate_release_notes: true
 
   # Beta publish job
   publish-beta:
@@ -217,12 +221,10 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub Pre-release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.determine-publish.outputs.version }}
-          release_name: Beta Release ${{ needs.determine-publish.outputs.version }}
+          name: Beta Release ${{ needs.determine-publish.outputs.version }}
           body: |
             ## Beta Release ${{ needs.determine-publish.outputs.version }}
             
@@ -245,6 +247,7 @@ jobs:
             Please report any issues or provide feedback on this beta release.
           draft: false
           prerelease: true
+          generate_release_notes: true
 
   # Notification job
   notify:
