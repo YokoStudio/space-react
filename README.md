@@ -12,6 +12,25 @@ yarn add @yokostudio/space-react
 pnpm add @yokostudio/space-react
 ```
 
+### Peer Dependencies
+
+This library requires the following peer dependencies to be installed in your project:
+
+```bash
+npm install react react-dom @headlessui/react @floating-ui/react framer-motion
+# or
+yarn add react react-dom @headlessui/react @floating-ui/react framer-motion
+# or
+pnpm add react react-dom @headlessui/react @floating-ui/react framer-motion
+```
+
+**Required peer dependencies:**
+- `react` >= 17.0.0
+- `react-dom` >= 17.0.0
+- `@headlessui/react` ^2.0.0
+- `@floating-ui/react` ^0.27.0
+- `framer-motion` ^12.0.0
+
 ## Usage
 
 ### Basic Setup
@@ -19,7 +38,7 @@ pnpm add @yokostudio/space-react
 ```tsx
 import React from 'react';
 import { Button, Input, Badge } from '@yokostudio/space-react';
-import '@yokostudio/space-react/styles';
+import '@yokostudio/space-react/style';
 
 function App() {
   return (
@@ -36,7 +55,7 @@ function App() {
 
 ```tsx
 import { Button } from '@yokostudio/space-react';
-import '@yokostudio/space-react/styles';
+import '@yokostudio/space-react/style';
 ```
 
 ## Components
@@ -57,7 +76,11 @@ import '@yokostudio/space-react/styles';
 
 ## Requirements
 
-- React 18.3.1 or higher
+- React >= 17.0.0
+- React DOM >= 17.0.0
+- @headlessui/react ^2.0.0
+- @floating-ui/react ^0.27.0
+- framer-motion ^12.0.0
 - TypeScript (for type definitions)
 
 ## Styling
@@ -65,7 +88,7 @@ import '@yokostudio/space-react/styles';
 This library uses Tailwind CSS for styling. Make sure you have Tailwind CSS configured in your project, or import the styles:
 
 ```tsx
-import '@yokostudio/space-react/styles';
+import '@yokostudio/space-react/style';
 ```
 
 ## TypeScript Support
