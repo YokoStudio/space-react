@@ -24,10 +24,8 @@ export default defineConfig(({ mode }) => {
                     tsconfigPath: './tsconfig.lib.json',
                 }),
                 viteStaticCopy({
-                    targets: [
-                        { src: './lib/types/style.d.ts', dest: '.' }
-                    ],
-                })
+                    targets: [{ src: './lib/types/style.d.ts', dest: '.' }],
+                }),
             ],
             build: {
                 lib: {

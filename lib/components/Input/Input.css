@@ -1,22 +1,33 @@
 .text-input {
     @apply flex items-center gap-2;
     @apply text-neutral-2-default border border-neutral-6-default border-solid py-1 px-2 rounded text-body-b1 transition-all duration-200 ease-in-out outline-transparent outline outline-0 placeholder:text-neutral-2-disable;
+    /* Hover state - using CSS :hover for better reliability */
+    @apply hover:border-neutral-6-hover;
 
     &__input {
         @apply outline-none border-none focus:outline-none focus:border-none;
         @apply text-body-b1 placeholder:text-body-b1;
         @apply shrink;
+        @apply bg-transparent;
+        @apply w-full;
     }
 
-    &[data-hover] {
-        @apply border-neutral-6-hover;
-    }
-
+    /* Disabled state */
     &[data-disabled] {
         @apply text-neutral-1-disable border-neutral-2-disable bg-neutral-1-disable;
+        @apply cursor-not-allowed;
+        
+        /* Disable hover effects when disabled */
+        @apply hover:border-neutral-2-disable;
     }
 
+    /* Focus state */
     &[data-focus] {
+        @apply border-neutral-focus-dark outline-neutral-focus-dark outline-1;
+    }
+    
+    /* Focus-within for better accessibility */
+    &:focus-within {
         @apply border-neutral-focus-dark outline-neutral-focus-dark outline-1;
     }
 
@@ -39,6 +50,10 @@
 
         &[data-active="true"] {
             @apply w-6;
+        }
+
+        & button {
+            @apply size-4 justify-center items-center flex cursor-pointer border-none outline-none bg-transparent p-0;
         }
     }
 

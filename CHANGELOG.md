@@ -6,9 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Refactored the Input component's clear button and action button logic for improved clarity and maintainability.
+- The presence and display of the clear button and loading spinner (action box) are now handled more consistently.
+- Ensured accessibility and correct focus behavior when clearing input.
+- Improved controlled and uncontrolled mode handling when using the clear button.
+- Improved the Input component's internal value state management and overall event handling.
+
+### Added
+- Added support for more robust clear button action: input is properly cleared for both controlled and uncontrolled modes with associated events triggered for form libraries.
+- Input action area (clear button and loading spinner) is now rendered only when relevant, preventing extra DOM and unwanted spacing.
+- Enhanced accessibility for the clear button (aria-label).
+
 ### Fixed
-- Fixed unwanted spacing in Input component when neither a prepend icon nor action button is present.
-- Fixed input focus outline width for consistency
+- Fixed unwanted spacing in the Input component when neither a prepend icon, clear button, nor loading spinner is present.
 
 ### Removed
 - Removed Tailwind CSS’s global preflight styles from the library build to prevent unwanted overrides of consuming projects’ base styles.
