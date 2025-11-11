@@ -321,6 +321,8 @@ if [[ -f "$VERSION_STATE_FILE" ]]; then
   declare -a version_state_parts
   IFS=':' read -r -a version_state_parts <<< "$version_state"
   version_in_progress=${version_state_parts[1]}
+  # Strip 'v' prefix if present to ensure clean version
+  version_in_progress=$(echo $version_in_progress | sed 's/^v//')
 fi
 
 get_project_url
@@ -358,7 +360,8 @@ if [[ $is_committing == true ]]; then
     fi
     echo -e "Recovering context for $branch_version ...\n ---"
 
-    version_in_progress=$branch_version
+    # Strip 'v' prefix if present to ensure clean version
+    version_in_progress=$(echo $branch_version | sed 's/^v//')
     recover_commit_progress $version_in_progress
     progress=$?
 
@@ -483,7 +486,8 @@ if [[ $is_hotfix == false ]]; then
   echo "  Default: $next_version (Press Enter)"
   read user_version
   if [[ ! -z $user_version ]]; then
-    next_version=$user_version
+    # Strip 'v' prefix if user provided it to ensure clean version
+    next_version=$(echo $user_version | sed 's/^v//')
   fi
   echo "Using $next_version as next version."
 
@@ -579,12 +583,17 @@ else
     fi
   fi
 
-  echo -e "\n---\nPatching $base_version ...\n---\n"
+  # Normalize base_version - strip 'v' prefix if present
+  # We'll add it back when needed for git operations
+  base_version_original=$base_version
+  base_version=$(echo $base_version | sed 's/^v//')
+
+  echo -e "\n---\nPatching $base_version_original ...\n---\n"
 
   # 3. Create the release branch: release/x.y.(z+1)
   echo -e "Validating patch version... "
-  # Strip 'v' prefix if present for version bumping
-  base_version_clean=$(echo $base_version | sed 's/^v//')
+  # Use clean version for bumping
+  base_version_clean=$base_version
   next_version=$(bump $base_version_clean patch)
   while true; do
     # Check for tag with 'v' prefix since tags are created with 'v'
@@ -600,8 +609,13 @@ else
 
   release_branch="release/$next_version"
 
-  echo -e "\nPreparing hotifx branch for $base_version (-> $next_version) ..."
-  git checkout tags/$base_version -b $release_branch
+  echo -e "\nPreparing hotifx branch for $base_version_original (-> $next_version) ..."
+  # Try with 'v' prefix first (most common), fallback to without if needed
+  if git rev-parse "v$base_version^{tag}" &> /dev/null; then
+    git checkout tags/v$base_version -b $release_branch
+  else
+    git checkout tags/$base_version -b $release_branch
+  fi
   if (( $? != 0 )); then
     echo "[ERR] Unable to create $release_branch branch"
     exit 1
