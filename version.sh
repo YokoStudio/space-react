@@ -255,9 +255,10 @@ recover_commit_progress() {
     # See if already tagged
     echo -en " Checking tags: ... "
 
-    tag_exists $version
+    # Check for tag with 'v' prefix since tags are created with 'v'
+    tag_exists "v$version"
     if (( $? == 0 )); then
-      echo -e "\r Checking tags: $version is already tagged. [OK] "
+      echo -e "\r Checking tags: v$version is already tagged. [OK] "
       progress=5
     else
       echo -e "\r Checking tags: $version is untagged. [PENDING] "
@@ -473,7 +474,9 @@ if [[ $is_hotfix == false ]]; then
 
   # 3. Ask developer to confirm the new version (minor bump by default: x.(y+1).0)
   last_tag=${latest_tags[0]}
-  next_version=$(bump $last_tag $version_arg)
+  # Strip 'v' prefix if present for version bumping
+  last_tag_clean=$(echo $last_tag | sed 's/^v//')
+  next_version=$(bump $last_tag_clean $version_arg)
   echo ""
   echo "> What should be the next version?"
   echo "  Latest tag: $last_tag"
@@ -580,9 +583,12 @@ else
 
   # 3. Create the release branch: release/x.y.(z+1)
   echo -e "Validating patch version... "
-  next_version=$(bump $base_version patch)
+  # Strip 'v' prefix if present for version bumping
+  base_version_clean=$(echo $base_version | sed 's/^v//')
+  next_version=$(bump $base_version_clean patch)
   while true; do
-    tag_exists $next_version
+    # Check for tag with 'v' prefix since tags are created with 'v'
+    tag_exists "v$next_version"
     if (( $? == 0 )); then
       echo -e "[$next_version]: Already exists."
       next_version=$(bump $next_version patch)
