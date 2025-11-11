@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [v0.3.0](https://github.com/yokostudio/space-react/releases/tag/v0.3.0) <sub>/ 2025-11-12</sub>
 ### Changed
 - Refactored the Input component's clear button and action button logic for improved clarity and maintainability.
 - The presence and display of the clear button and loading spinner (action box) are now handled more consistently.
