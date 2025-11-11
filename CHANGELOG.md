@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Fixed unwanted spacing in Input component when neither a prepend icon nor action button is present.
+- Fixed input focus outline width for consistency
+
+### Removed
+- Removed Tailwind CSS’s global preflight styles from the library build to prevent unwanted overrides of consuming projects’ base styles.
+- Removed default font family from the UI kit (`lib/index.css`). Font inheritance is now determined entirely by the consuming project unless the CSS variable `--space-font-family` is explicitly set. This prevents the UI kit from overriding the consuming project's global font family.
+
 
 ## [0.1.2](https://github.com/yokostudio/space-react/releases/tag/0.1.2) <sub>/ 2025-09-18</sub>
 

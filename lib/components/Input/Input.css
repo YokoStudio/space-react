@@ -1,9 +1,9 @@
 .text-input {
     @apply flex items-center gap-2;
-    @apply text-neutral-2-default border border-neutral-6-default border-solid py-1 px-2 rounded text-body-b1 transition-all duration-200 ease-in-out outline-transparent outline placeholder:text-neutral-2-disable;
+    @apply text-neutral-2-default border border-neutral-6-default border-solid py-1 px-2 rounded text-body-b1 transition-all duration-200 ease-in-out outline-transparent outline outline-0 placeholder:text-neutral-2-disable;
 
     &__input {
-        @apply focus:outline-none focus:border-none;
+        @apply outline-none border-none focus:outline-none focus:border-none;
         @apply text-body-b1 placeholder:text-body-b1;
         @apply shrink;
     }
@@ -17,7 +17,7 @@
     }
 
     &[data-focus] {
-        @apply border-neutral-focus-dark outline-neutral-focus-dark;
+        @apply border-neutral-focus-dark outline-neutral-focus-dark outline-1;
     }
 
     &__size {

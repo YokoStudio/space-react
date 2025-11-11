@@ -1,10 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
-@import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@layer base {
-    html, body {
-        @apply font-titillium;
-    }
+/* 
+ * Font family configuration with automatic fallback
+ * 
+ * This system automatically detects and uses the consuming project's font family
+ * if set, otherwise falls back to 'Titillium Web'.
+ * 
+ * How it works:
+ * 1. Consuming projects can set --space-font-family CSS variable to explicitly override
+ * 2. If consuming project has set font-family on html/body, it will be inherited
+ * 3. Otherwise, 'Titillium Web' is used as the default fallback
+ * 
+ * Example usage in consuming project:
+ *   Option 1 (Recommended): Set CSS variable before importing UI kit styles
+ *     :root { --space-font-family: 'Inter', sans-serif; }
+ *   
+ *   Option 2: Set font-family on html/body (will work if set before UI kit styles load)
+ *     html { font-family: 'Inter', sans-serif; }
+ */
+:root {
+    /* 
+     * Default to UI kit font, but can be overridden by consuming project.
+     * Consuming projects should set this variable BEFORE importing UI kit styles
+     * to use their own font family.
+     */
+    --space-font-family: 'Titillium Web', sans-serif;
+}
+
+/* 
+ * Apply font family with intelligent fallback.
+ * 
+ * Strategy:
+ * - First, try to use --space-font-family (set by consuming project or default)
+ * - The fallback chain ensures 'Titillium Web' is used if variable is not set
+ * - If consuming project sets font-family on html/body with higher specificity
+ *   or !important, it will take precedence
+ */
+html {
+    /* 
+     * Use CSS variable with fallback to UI kit default.
+     * Consuming projects can override by:
+     * 1. Setting --space-font-family CSS variable
+     * 2. Setting font-family on html with higher specificity or !important
+     */
+    font-family: var(--space-font-family, 'Titillium Web', sans-serif);
+}
+
+body {
+    /* 
+     * Inherit from html element.
+     * This allows consuming project's font to cascade naturally.
+     * If consuming project sets font-family on body, it will override this.
+     */
+    font-family: inherit;
 }

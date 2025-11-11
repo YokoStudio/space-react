@@ -65,12 +65,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                         {...(hover && { 'data-hover': hover })}
                         {...(disabled && { 'data-disabled': disabled })}
                     >
-                        <div
-                            className={clsx(bemClass('action-box'))}
-                            data-active={String(!!prependIcon)}
-                        >
-                            {prependIcon}
-                        </div>
+                        {prependIcon && (
+                            <div
+                                className={clsx(bemClass('action-box'))}
+                                data-active={String(!!prependIcon)}
+                            >
+                                {prependIcon}
+                            </div>
+                        )}
                         <input
                             className={clsx(bemClass('input'), className)}
                             placeholder={placeholder}
@@ -81,17 +83,25 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                             onFocus={onFocus}
                             onBlur={onBlur}
                         />
-                        <div
-                            className={clsx(bemClass('action-box'))}
-                            data-active={String(clearButton || loading)}
-                        >
-                            {clearButton && (
-                                <button onClick={onClickClearButton}>
-                                    <Icon name="cross-circle" size="md" />
-                                </button>
-                            )}
-                            {loading && <Spinner direction="row" size="md" />}
-                        </div>
+                        {clearButton ||
+                            (loading && (
+                                <div
+                                    className={clsx(bemClass('action-box'))}
+                                    data-active={String(clearButton || loading)}
+                                >
+                                    {clearButton && (
+                                        <button onClick={onClickClearButton}>
+                                            <Icon
+                                                name="cross-circle"
+                                                size="md"
+                                            />
+                                        </button>
+                                    )}
+                                    {loading && (
+                                        <Spinner direction="row" size="md" />
+                                    )}
+                                </div>
+                            ))}
                     </div>
                 )}
             </BaseInput>
