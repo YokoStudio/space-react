@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.2](https://github.com/yokostudio/space-react/releases/tag/0.2.2) <sub>/ 2025-11-12</sub>
+### Fixed
+- Resolved a breaking change due to Vite 7 upgrade: the output CSS file in `dist/` is now always named `style.css`, restoring compatibility with package consumers and preventing missing stylesheet issues after build. This addresses Vite's new asset naming behavior and ensures consistent exports for CSS.
+
+
 ## [0.2.1](https://github.com/yokostudio/space-react/releases/tag/0.2.1) <sub>/ 2025-11-12</sub>
 ### Fixed
 - Added missing `postcss-import` dependency.

@@ -53,6 +53,10 @@ export default defineConfig(({ mode }) => {
                             '@floating-ui/react': 'FloatingUI',
                             'framer-motion': 'FramerMotion',
                         },
+                        assetFileNames: (assetInfo) =>
+                            assetInfo.name?.endsWith('.css')
+                                ? 'style.css'
+                                : assetInfo.name || 'asset',
                     },
                 },
                 outDir: 'dist',
