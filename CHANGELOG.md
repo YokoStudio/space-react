@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1](https://github.com/yokostudio/space-react/releases/tag/0.2.1) <sub>/ 2025-11-12</sub>
+### Fixed
+- Added missing `postcss-import` dependency.
+
 ## [0.2.0](https://github.com/yokostudio/space-react/releases/tag/0.2.0) <sub>/ 2025-11-12</sub>
 ### Changed
 - Refactored the Input component's clear button and action button logic for improved clarity and maintainability.
