@@ -2,6 +2,8 @@ import type { Preview } from '@storybook/react-vite';
 import '../public/orbit/style/yoko-orbit.css';
 // Load Google Fonts for Storybook only
 import './fonts.css';
+// Apply Titillium Web font to preview
+import './preview.css';
 import '../lib/index.css';
 
 const preview: Preview = {
