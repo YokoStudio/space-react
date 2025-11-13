@@ -1,5 +1,4 @@
 import './Button.css';
-import { Button as BaseButton } from '@headlessui/react';
 import { clsx } from 'clsx';
 import type { ButtonProps } from '../../types/button';
 import { forwardRef } from 'react';
@@ -32,38 +31,55 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
         const IconAttachment = (
             icon: ButtonProps['prependIcon'] | ButtonProps['appendIcon'],
+            position: 'prepend' | 'append',
         ) => {
             if (
                 typeof icon === 'string' &&
                 !!iconsMap[icon as IconProps['name']]
             ) {
                 return (
-                    <div className={clsx(bemClass('prepend-icon'))}>
+                    <div
+                        className={clsx(bemClass(`${position}-icon`))}
+                        aria-hidden="true"
+                    >
                         <Icon name={icon as IconProps['name']} size="lg" />
                     </div>
                 );
             }
 
-            return <div className={clsx(bemClass('prepend-icon'))}>{icon}</div>;
+            return (
+                <div
+                    className={clsx(bemClass(`${position}-icon`))}
+                    aria-hidden="true"
+                >
+                    {icon}
+                </div>
+            );
         };
 
+        const isDisabled = disabled || loading;
+
         return (
-            <BaseButton
+            <button
+                ref={ref}
+                type={type}
+                disabled={isDisabled}
                 className={clsx(
                     bemClass(),
                     bemClass('color', color),
                     bemClass('variant', variant),
                     bemClass('size', size),
                     {
+                        [bemClass('', 'loading')]: loading,
                         'w-full': block,
                     },
                     className,
                 )}
-                disabled={disabled}
-                type={type}
-                ref={ref}
+                data-loading={loading || undefined}
+                data-disabled={isDisabled || undefined}
                 aria-label={ariaLabel}
                 aria-describedby={ariaDescribedby}
+                aria-busy={loading || undefined}
                 {...props}
             >
                 {loading ? (
@@ -76,12 +92,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                     />
                 ) : (
                     <>
-                        {prependIcon && IconAttachment(prependIcon)}
+                        {prependIcon && IconAttachment(prependIcon, 'prepend')}
                         {children}
-                        {appendIcon && IconAttachment(appendIcon)}
+                        {appendIcon && IconAttachment(appendIcon, 'append')}
                     </>
                 )}
-            </BaseButton>
+            </button>
         );
     },
 );
