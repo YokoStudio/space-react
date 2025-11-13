@@ -5,10 +5,13 @@
         @apply flex-col;
     }
 
+    &__icon {
+        @apply flex items-center justify-center;
+    }
 
     &__icon--svg {
         animation: spin 1s cubic-bezier(0.27, 0.55, 0.78, 0.58) infinite;
-        @apply text-neutral-1-default;
+        @apply text-neutral-1-default block;
     }
 
     &__content {
