@@ -76,7 +76,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                     className,
                 )}
                 data-loading={loading || undefined}
-                data-disabled={isDisabled || undefined}
+                data-disabled={disabled || undefined}
                 aria-label={ariaLabel}
                 aria-describedby={ariaDescribedby}
                 aria-busy={loading || undefined}

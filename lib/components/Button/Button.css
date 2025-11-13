@@ -30,10 +30,10 @@
     }
 
     &[data-loading] {
-        @apply cursor-wait;
+        @apply cursor-wait pointer-events-none;
     }
 
-    &:disabled {
+    &:disabled:not([data-loading]) {
         @apply cursor-none pointer-events-none;
     }
 
@@ -47,6 +47,18 @@
                     @apply hover:bg-brand-1-hover;
                     @apply focus:bg-brand-1-default focus:outline-neutral-0;
                     @apply active:bg-brand-1-press active:border-brand-1-press active:outline-brand-1-press;
+
+                    &[data-loading]:hover {
+                        @apply bg-brand-1-default;
+                    }
+
+                    &[data-loading]:focus {
+                        @apply bg-brand-1-default outline-transparent;
+                    }
+
+                    &[data-loading]:active {
+                        @apply bg-brand-1-default border-transparent outline-transparent;
+                    }
                 }
 
                 &--outlined {
@@ -54,6 +66,18 @@
                     @apply hover:bg-brand-subtle-10 hover:text-brand-1-hover hover:border-brand-1-hover;
                     @apply focus:bg-transparent focus:text-brand-1-default;
                     @apply active:bg-brand-subtle-10 active:text-brand-1-press active:border-brand-1-press;
+
+                    &[data-loading]:hover {
+                        @apply bg-transparent text-brand-1-default border-brand-1-default;
+                    }
+
+                    &[data-loading]:focus {
+                        @apply bg-transparent text-brand-1-default;
+                    }
+
+                    &[data-loading]:active {
+                        @apply bg-transparent text-brand-1-default border-brand-1-default;
+                    }
                 }
 
                 &--ghost {
@@ -61,6 +85,18 @@
                     @apply hover:text-brand-1-hover hover:bg-brand-subtle-10;
                     @apply focus:text-brand-1-default focus:outline-neutral-0;
                     @apply active:text-brand-1-press;
+
+                    &[data-loading]:hover {
+                        @apply text-brand-1-default bg-transparent;
+                    }
+
+                    &[data-loading]:focus {
+                        @apply text-brand-1-default outline-transparent;
+                    }
+
+                    &[data-loading]:active {
+                        @apply text-brand-1-default;
+                    }
                 }
             }
         }
@@ -72,6 +108,18 @@
                     @apply hover:bg-neutral-10-hover;
                     @apply focus:bg-neutral-10-default;
                     @apply active:bg-neutral-10-press active:border-neutral-1-default active:outline-neutral-1-default;
+
+                    &[data-loading]:hover {
+                        @apply bg-neutral-10-default;
+                    }
+
+                    &[data-loading]:focus {
+                        @apply bg-neutral-10-default outline-transparent;
+                    }
+
+                    &[data-loading]:active {
+                        @apply bg-neutral-10-default border-transparent outline-transparent;
+                    }
                 }
 
                 &--outlined {
@@ -79,6 +127,18 @@
                     @apply hover:bg-neutral-subtle-dark-5 hover:text-neutral-1-hover hover:border-neutral-6-hover;
                     @apply focus:bg-transparent focus:text-neutral-1-default;
                     @apply active:bg-neutral-subtle-dark-10 active:text-neutral-1-press active:border-neutral-6-press;
+
+                    &[data-loading]:hover {
+                        @apply bg-transparent text-neutral-1-default border-neutral-6-default;
+                    }
+
+                    &[data-loading]:focus {
+                        @apply bg-transparent text-neutral-1-default;
+                    }
+
+                    &[data-loading]:active {
+                        @apply bg-transparent text-neutral-1-default border-neutral-6-default;
+                    }
                 }
 
                 &--ghost {
@@ -86,6 +146,18 @@
                     @apply hover:text-neutral-1-hover hover:bg-neutral-subtle-dark-5;
                     @apply focus:text-neutral-1-default focus:outline-neutral-0;
                     @apply active:text-neutral-1-press active:bg-neutral-subtle-dark-10;
+
+                    &[data-loading]:hover {
+                        @apply text-neutral-1-default bg-transparent;
+                    }
+
+                    &[data-loading]:focus {
+                        @apply text-neutral-1-default outline-transparent;
+                    }
+
+                    &[data-loading]:active {
+                        @apply text-neutral-1-default bg-transparent;
+                    }
                 }
             }
         }
@@ -97,6 +169,18 @@
                     @apply hover:bg-error-1-hover;
                     @apply focus:bg-error-1-default;
                     @apply active:bg-error-1-press active:border-error-1-press active:outline-error-1-press;
+
+                    &[data-loading]:hover {
+                        @apply bg-error-1-default;
+                    }
+
+                    &[data-loading]:focus {
+                        @apply bg-error-1-default outline-transparent;
+                    }
+
+                    &[data-loading]:active {
+                        @apply bg-error-1-default border-transparent outline-transparent;
+                    }
                 }
 
                 &--outlined {
@@ -104,6 +188,18 @@
                     @apply hover:bg-error-1-default/10 hover:text-error-1-hover hover:border-error-1-hover;
                     @apply focus:bg-transparent focus:text-error-1-default;
                     @apply active:bg-error-1-default/15 active:text-error-1-press active:border-error-1-press;
+
+                    &[data-loading]:hover {
+                        @apply bg-transparent text-error-1-default border-error-1-default;
+                    }
+
+                    &[data-loading]:focus {
+                        @apply bg-transparent text-error-1-default;
+                    }
+
+                    &[data-loading]:active {
+                        @apply bg-transparent text-error-1-default border-error-1-default;
+                    }
                 }
 
                 &--ghost {
@@ -111,6 +207,18 @@
                     @apply hover:text-error-1-hover hover:bg-error-1-default/10;
                     @apply focus:text-error-1-default focus:outline-neutral-0;
                     @apply active:text-error-1-press active:bg-error-1-default/15;
+
+                    &[data-loading]:hover {
+                        @apply text-error-1-default bg-transparent;
+                    }
+
+                    &[data-loading]:focus {
+                        @apply text-error-1-default outline-transparent;
+                    }
+
+                    &[data-loading]:active {
+                        @apply text-error-1-default bg-transparent;
+                    }
                 }
             }
         }
@@ -123,7 +231,7 @@
             @apply outline outline-2 outline-transparent transition-all duration-200 ease-in-out;
             @apply focus:border-neutral-100 focus:outline-neutral-0;
 
-            &[disabled] {
+            &:disabled:not([data-loading]) {
                 @apply !bg-neutral-10-disable !text-neutral-10-default !border-neutral-75 !outline-transparent;
             }
         }
@@ -134,7 +242,7 @@
             @apply hover:!outline-transparent;
             @apply active:outline-transparent active:border-inherit;
 
-            &[disabled] {
+            &:disabled:not([data-loading]) {
                 @apply !bg-transparent !border-brand-1-disable !outline-transparent !text-brand-1-disable;
             }
         }
@@ -146,7 +254,7 @@
             @apply focus:outline-neutral-0;
             @apply active:outline-transparent;
 
-            &[disabled] {
+            &:disabled:not([data-loading]) {
                 @apply bg-transparent border-transparent outline-transparent text-brand-1-disable;
             }
         }
