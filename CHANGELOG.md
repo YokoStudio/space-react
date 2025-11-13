@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Refactored Button component to use native `<button>` element instead of HeadlessUI's BaseButton, following UI kit best practices and aligning with Input component patterns.
+- Refactored Button CSS structure: improved BEM organization, consolidated variant styles, and standardized filled variant pattern with base structure and color-specific overrides.
+- Replaced `ring` utilities with `outline` utilities throughout Button CSS for better focus state management.
+- Improved Button CSS organization with clear section comments and consistent formatting.
+
+### Added
+- Added data attributes (`data-loading`, `data-disabled`) to Button component for better state management.
+- Added comprehensive accessibility attributes to Button (aria-busy, aria-hidden for icons).
+- Enhanced Button Storybook with improved documentation, better argTypes descriptions, and visual examples including Block prop demonstration.
+- Added smooth outline transitions for Button focus states.
+- Added loading state overrides to prevent hover/focus/active interactions when button is loading.
+
+### Fixed
+- Fixed Button loading state to maintain normal visual appearance instead of showing disabled styles.
+- Fixed Button outline transition smoothness by using consistent outline width and transparent default state.
+- Fixed Spinner icon vertical centering in Button by adding proper flex alignment to icon wrapper.
+- Prevented hover, focus, and active state triggers when Button is in loading state.
+
+### Removed
+- Removed HeadlessUI dependency from Button component (no longer requires `@headlessui/react` for Button).
+
 ## [0.2.2](https://github.com/yokostudio/space-react/releases/tag/0.2.2) <sub>/ 2025-11-12</sub>
 ### Fixed
 - Resolved a breaking change due to Vite 7 upgrade: the output CSS file in `dist/` is now always named `style.css`, restoring compatibility with package consumers and preventing missing stylesheet issues after build. This addresses Vite's new asset naming behavior and ensures consistent exports for CSS.
