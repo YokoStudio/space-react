@@ -1,5 +1,5 @@
 .button {
-    @apply flex rounded transition-all ease-in-out duration-200 cursor-pointer border-none outline-none select-none;
+    @apply flex justify-center items-center rounded transition-all ease-in-out duration-200 cursor-pointer border-none outline-none outline-offset-0 select-none;
 
     /* Size variants */
     &__size {
@@ -26,7 +26,7 @@
 
     /* States */
     &[data-disabled] {
-        @apply cursor-not-allowed pointer-events-none;
+        @apply cursor-none pointer-events-none;
     }
 
     &[data-loading] {
@@ -34,22 +34,7 @@
     }
 
     &:disabled {
-        @apply cursor-not-allowed pointer-events-none;
-    }
-
-    /* Variant styles */
-    &__variant {
-        &--filled {
-            @apply border-2 border-solid border-transparent bg-neutral-10-default text-neutral-10-default;
-            @apply outline outline-2 outline-transparent transition-all duration-200 ease-in-out outline-offset-0;
-            @apply hover:bg-neutral-10-hover;
-            @apply focus:bg-neutral-10-default focus:border-neutral-100 focus:outline-neutral-0 focus:outline-2;
-            @apply active:bg-neutral-10-press active:border-neutral-1-default;
-
-            &[disabled] {
-                @apply !bg-neutral-10-disable !text-neutral-10-default !border-neutral-75 !outline-transparent;
-            }
-        }
+        @apply cursor-none pointer-events-none;
     }
 
     /* Color and variant combinations */
@@ -65,27 +50,17 @@
                 }
 
                 &--outlined {
-                    @apply border-2 border-brand-1-default bg-transparent text-brand-1-default;
-                    @apply outline outline-2 outline-transparent transition-all duration-200 ease-in-out;
-                    @apply hover:bg-brand-subtle-10 hover:text-brand-1-hover;
-                    @apply focus:bg-transparent focus:text-brand-1-default focus:outline-neutral-0 focus:outline-2;
-                    @apply active:bg-brand-subtle-10 active:text-brand-1-press active:outline-transparent;
-
-                    &[disabled] {
-                        @apply bg-transparent border-transparent outline-transparent text-brand-1-disable;
-                    }
+                    @apply border-brand-1-default text-brand-1-default;
+                    @apply hover:bg-brand-subtle-10 hover:text-brand-1-hover hover:border-brand-1-hover;
+                    @apply focus:bg-transparent focus:text-brand-1-default;
+                    @apply active:bg-brand-subtle-10 active:text-brand-1-press active:border-brand-1-press;
                 }
 
                 &--ghost {
-                    @apply border-2 border-transparent bg-transparent text-brand-1-default;
-                    @apply outline outline-2 outline-transparent transition-all duration-200 ease-in-out;
+                    @apply text-brand-1-default;
                     @apply hover:text-brand-1-hover hover:bg-brand-subtle-10;
-                    @apply focus:text-brand-1-default focus:outline-neutral-0 focus:outline-2;
-                    @apply active:text-brand-1-press active:outline-transparent;
-
-                    &[disabled] {
-                        @apply bg-transparent border-transparent outline-transparent text-brand-1-disable;
-                    }
+                    @apply focus:text-brand-1-default focus:outline-neutral-0;
+                    @apply active:text-brand-1-press;
                 }
             }
         }
@@ -100,27 +75,17 @@
                 }
 
                 &--outlined {
-                    @apply border-2 border-transparent bg-transparent text-neutral-1-default;
-                    @apply outline outline-2 outline-transparent transition-all duration-200 ease-in-out;
-                    @apply hover:bg-neutral-subtle-dark-5 hover:text-neutral-1-hover;
-                    @apply focus:bg-transparent focus:text-neutral-1-default focus:outline-neutral-0 focus:outline-2;
-                    @apply active:bg-neutral-subtle-dark-10 active:text-neutral-1-press;
-
-                    &[disabled] {
-                        @apply bg-transparent border-transparent outline-transparent text-brand-1-disable;
-                    }
+                    @apply text-neutral-1-default border-neutral-6-default;
+                    @apply hover:bg-neutral-subtle-dark-5 hover:text-neutral-1-hover hover:border-neutral-6-hover;
+                    @apply focus:bg-transparent focus:text-neutral-1-default;
+                    @apply active:bg-neutral-subtle-dark-10 active:text-neutral-1-press active:border-neutral-6-press;
                 }
 
                 &--ghost {
-                    @apply border-2 border-transparent bg-transparent text-neutral-1-default;
-                    @apply outline outline-2 outline-transparent transition-all duration-200 ease-in-out;
+                    @apply text-neutral-1-default;
                     @apply hover:text-neutral-1-hover hover:bg-neutral-subtle-dark-5;
-                    @apply focus:text-neutral-1-default focus:outline-neutral-0 focus:outline-2;
+                    @apply focus:text-neutral-1-default focus:outline-neutral-0;
                     @apply active:text-neutral-1-press active:bg-neutral-subtle-dark-10;
-
-                    &[disabled] {
-                        @apply bg-transparent border-transparent outline-transparent text-brand-1-disable;
-                    }
                 }
             }
         }
@@ -135,28 +100,54 @@
                 }
 
                 &--outlined {
-                    @apply border-2 border-transparent bg-transparent text-error-1-default;
-                    @apply outline outline-2 outline-transparent transition-all duration-200 ease-in-out;
-                    @apply hover:bg-error-1-default/10 hover:text-error-1-hover;
-                    @apply focus:bg-transparent focus:text-error-1-default focus:outline-neutral-0 focus:outline-2;
-                    @apply active:bg-error-1-default/15 active:text-error-1-press;
-
-                    &[disabled] {
-                        @apply bg-transparent border-transparent outline-transparent text-brand-1-disable;
-                    }
+                    @apply text-error-1-default border-error-1-default;
+                    @apply hover:bg-error-1-default/10 hover:text-error-1-hover hover:border-error-1-hover;
+                    @apply focus:bg-transparent focus:text-error-1-default;
+                    @apply active:bg-error-1-default/15 active:text-error-1-press active:border-error-1-press;
                 }
 
                 &--ghost {
-                    @apply border-2 border-transparent bg-transparent text-error-1-default;
-                    @apply outline outline-2 outline-transparent transition-all duration-200 ease-in-out;
+                    @apply text-error-1-default;
                     @apply hover:text-error-1-hover hover:bg-error-1-default/10;
-                    @apply focus:text-error-1-default focus:outline-neutral-0 focus:outline-2 focus:bg-transparent;
+                    @apply focus:text-error-1-default focus:outline-neutral-0;
                     @apply active:text-error-1-press active:bg-error-1-default/15;
-
-                    &[disabled] {
-                        @apply bg-transparent border-transparent outline-transparent text-brand-1-disable;
-                    }
                 }
+            }
+        }
+    }
+
+    /* Variant styles */
+    &__variant {
+        &--filled {
+            @apply border-2 border-solid border-transparent text-neutral-10-default;
+            @apply outline outline-2 outline-transparent transition-all duration-200 ease-in-out;
+            @apply focus:border-neutral-100 focus:outline-neutral-0;
+
+            &[disabled] {
+                @apply !bg-neutral-10-disable !text-neutral-10-default !border-neutral-75 !outline-transparent;
+            }
+        }
+
+        &--outlined {
+            @apply border border-solid bg-transparent outline-1;
+            @apply focus:border-neutral-0 focus:outline-neutral-0;
+            @apply hover:!outline-transparent;
+            @apply active:outline-transparent active:border-inherit;
+
+            &[disabled] {
+                @apply !bg-transparent !border-brand-1-disable !outline-transparent !text-brand-1-disable;
+            }
+        }
+
+        &--ghost {
+            @apply bg-transparent;
+            @apply outline outline-1 outline-transparent transition-all duration-200 ease-in-out;
+            @apply hover:text-brand-1-hover hover:bg-brand-subtle-10 hover:!outline-transparent;
+            @apply focus:outline-neutral-0;
+            @apply active:outline-transparent;
+
+            &[disabled] {
+                @apply bg-transparent border-transparent outline-transparent text-brand-1-disable;
             }
         }
     }

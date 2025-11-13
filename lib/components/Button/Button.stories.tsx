@@ -191,10 +191,28 @@ export const Loading: Story = {
 
 export const Block: Story = {
     args: {
-        ...Default.args,
-        children: 'Full Width Button',
-        block: true,
+        children: 'Button',
     },
+    render: () => (
+        <div className="flex flex-col gap-4 w-96">
+            <div className="border border-neutral-6-default rounded p-4">
+                <p className="text-sm text-neutral-2-default mb-2">
+                    Container width: 100% (384px)
+                </p>
+                <Button block onClick={action('clicked')}>
+                    Block Button (Full Width)
+                </Button>
+            </div>
+            <div className="border border-neutral-6-default rounded p-4">
+                <p className="text-sm text-neutral-2-default mb-2">
+                    Container width: 100% (384px)
+                </p>
+                <Button onClick={action('clicked')}>
+                    Regular Button (Auto Width)
+                </Button>
+            </div>
+        </div>
+    ),
 };
 
 export const Disabled: Story = {
@@ -214,6 +232,9 @@ export const SubmitButton: Story = {
 };
 
 export const AllVariants: Story = {
+    args: {
+        children: 'Button',
+    },
     render: () => (
         <div className="flex flex-col gap-4">
             <div className="flex gap-2">
@@ -290,6 +311,9 @@ export const AllVariants: Story = {
 };
 
 export const AllSizes: Story = {
+    args: {
+        children: 'Button',
+    },
     render: () => (
         <div className="flex items-center gap-2 flex-wrap">
             <Button size="xs" onClick={action('clicked')}>
@@ -312,6 +336,9 @@ export const AllSizes: Story = {
 };
 
 export const WithCustomIcon: Story = {
+    args: {
+        children: 'Button',
+    },
     render: () => (
         <div className="flex gap-2">
             <Button
