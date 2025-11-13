@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0](https://github.com/yokostudio/space-react/releases/tag/0.3.0) <sub>/ 2025-11-13</sub>
+
 ### Changed
 - Refactored Button component to use native `<button>` element instead of HeadlessUI's BaseButton, following UI kit best practices and aligning with Input component patterns.
 - Refactored Button CSS structure: improved BEM organization, consolidated variant styles, and standardized filled variant pattern with base structure and color-specific overrides.
