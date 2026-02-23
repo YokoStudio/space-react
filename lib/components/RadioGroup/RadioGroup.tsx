@@ -1,11 +1,12 @@
 import './RadioGroup.css';
-import { Field, Label, RadioGroup as BaseRadioGroup } from '@headlessui/react';
+import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import { clsx } from 'clsx';
 import type { RadioGroupProps } from '../../types/radioGroup';
 import { Radio } from '../Radio/Radio';
 
 export const RadioGroup = ({
     value,
+    defaultValue,
     options = [],
     disabled,
     direction,
@@ -13,28 +14,36 @@ export const RadioGroup = ({
     children,
     onChange,
 }: RadioGroupProps) => {
+    const orientation =
+        direction === 'col' ? 'vertical' : ('horizontal' as const);
+
     return (
-        <BaseRadioGroup
-            value={value}
+        <RadioGroupPrimitive.Root
+            value={value ?? undefined}
+            defaultValue={defaultValue}
+            onValueChange={onChange}
+            disabled={disabled}
+            orientation={orientation}
             className={clsx(
                 'flex',
                 'gap-4',
                 {
-                    [`flex-${direction}`]: direction,
+                    'flex-row': direction === 'row' || !direction,
+                    'flex-col': direction === 'col',
                 },
                 className,
             )}
-            disabled={disabled}
-            onChange={onChange}
         >
-            {children ||
-                (options.length &&
-                    options.map((option) => (
-                        <Field className={'flex items-center gap-2'}>
-                            <Radio value={option} />
-                            <Label>{option}</Label>
-                        </Field>
-                    )))}
-        </BaseRadioGroup>
+            {children ??
+                options.map((option) => (
+                    <label
+                        key={option}
+                        className="flex items-center gap-2 cursor-pointer"
+                    >
+                        <Radio value={option} disabled={disabled} />
+                        <span>{option}</span>
+                    </label>
+                ))}
+        </RadioGroupPrimitive.Root>
     );
 };

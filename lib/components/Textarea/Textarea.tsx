@@ -1,33 +1,36 @@
-import { Textarea as BaseTextarea } from '@headlessui/react';
 import './Textarea.css';
-import { ReactNode } from 'react';
+import { ReactNode, forwardRef } from 'react';
 
 export type TextareaProps = {
-    prependIcon: ReactNode;
+    prependIcon?: ReactNode;
     name?: string;
-    value: string;
-    actionButton: ReactNode;
+    value?: string;
+    actionButton?: ReactNode;
     defaultValue?: string;
 };
 
-export const Textarea = ({
-    name,
-    value,
-    defaultValue,
-    prependIcon,
-    actionButton,
-}: TextareaProps) => {
-    return (
-        <div className="textarea">
-            <span className="textarea-prependicon">{prependIcon}</span>
-            <BaseTextarea
-                name={name}
-                value={value}
-                defaultValue={defaultValue}
-            ></BaseTextarea>
-            {actionButton && (
-                <span className="textarea-action">{actionButton}</span>
-            )}
-        </div>
-    );
-};
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+    (
+        { name, value, defaultValue, prependIcon, actionButton }: TextareaProps,
+        ref,
+    ) => {
+        return (
+            <div className="textarea">
+                {prependIcon && (
+                    <span className="textarea-prependicon">{prependIcon}</span>
+                )}
+                <textarea
+                    ref={ref}
+                    name={name}
+                    value={value}
+                    defaultValue={defaultValue}
+                />
+                {actionButton && (
+                    <span className="textarea-action">{actionButton}</span>
+                )}
+            </div>
+        );
+    },
+);
+
+Textarea.displayName = 'Textarea';

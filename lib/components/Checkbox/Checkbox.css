@@ -5,7 +5,8 @@
     @apply active:border-neutral-2-press;
     @apply data-[disabled]:border-neutral-2-disable data-[disabled]:cursor-default;
 
-    &[data-checked], &[data-indeterminate] {
+    &[data-state='checked'],
+    &[data-state='indeterminate'] {
         @apply border-transparent;
         @apply bg-brand-1-default text-neutral-100;
         @apply hover:bg-brand-1-hover;

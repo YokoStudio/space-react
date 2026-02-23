@@ -1,9 +1,8 @@
 import { DropdownOptionProp } from '../../types/dropdown';
-import { ListboxOption } from '@headlessui/react';
 import { Checkbox } from '../Checkbox/Checkbox';
 import { CheckIcon } from './icons/Check';
-import { useRef } from 'react';
 import { useDropdownContext } from './context';
+import { useEffect } from 'react';
 
 export function DropdownOption<T>({
     label,
@@ -12,49 +11,62 @@ export function DropdownOption<T>({
     prependIcon,
     disabled,
 }: DropdownOptionProp<T>) {
-    const optionRef = useRef<HTMLDivElement>(null);
-    const { multiple } = useDropdownContext();
+    const {
+        multiple,
+        value: selectedValue,
+        onChange,
+        setOpen,
+        registerOption,
+    } = useDropdownContext();
+
+    useEffect(() => {
+        registerOption(value, label);
+    }, [value, label, registerOption]);
+
+    const isArray = Array.isArray(selectedValue);
+    const selected = isArray
+        ? (selectedValue as unknown[]).includes(value)
+        : (selectedValue as unknown) === value;
+
+    const handleClick = () => {
+        if (disabled) return;
+        if (multiple) {
+            const arr = (selectedValue as unknown[]) ?? [];
+            const next = arr.includes(value)
+                ? arr.filter((v) => v !== value)
+                : [...arr, value];
+            onChange(next);
+        } else {
+            onChange(value);
+            setOpen(false);
+        }
+    };
 
     return (
-        <ListboxOption
-            as="div"
+        <div
+            role="option"
+            aria-selected={selected}
+            aria-disabled={disabled}
             className="dropdown_listitem"
-            value={value}
-            disabled={disabled}
-            ref={optionRef}
+            data-disabled={disabled ? '' : undefined}
+            onClick={handleClick}
         >
-            {({ selected, selectedOption }) => {
-                if (selectedOption) {
-                    return (
-                        <div className="text-body-b1 text-neutral-2-default">
-                            {label}
-                        </div>
-                    );
-                }
-
-                return (
-                    <>
-                        <div className="dropdown_listitem__checkbox">
-                            {multiple ? (
-                                <Checkbox
-                                    onChange={() => optionRef.current?.click()}
-                                    checked={selected}
-                                    disabled={disabled}
-                                />
-                            ) : (
-                                selected && <CheckIcon />
-                            )}
-                        </div>
-                        <div className="grow flex gap-1">
-                            {prependIcon && <div>{prependIcon}</div>}
-                            <div className="dropdown_listitem__label">
-                                {label}
-                            </div>
-                            {badge && <div></div>}
-                        </div>
-                    </>
-                );
-            }}
-        </ListboxOption>
+            <div className="dropdown_listitem__checkbox">
+                {multiple ? (
+                    <Checkbox
+                        onChange={() => handleClick()}
+                        checked={selected}
+                        disabled={disabled}
+                    />
+                ) : (
+                    selected && <CheckIcon />
+                )}
+            </div>
+            <div className="grow flex gap-1">
+                {prependIcon && <div>{prependIcon}</div>}
+                <div className="dropdown_listitem__label">{label}</div>
+                {badge && <div />}
+            </div>
+        </div>
     );
 }

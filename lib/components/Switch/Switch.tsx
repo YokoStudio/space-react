@@ -1,14 +1,27 @@
-import {
-    Switch as BaseSwitch,
-    SwitchProps as BaseSwitchProps,
-} from '@headlessui/react';
+import * as SwitchPrimitive from '@radix-ui/react-switch';
 import { clsx } from 'clsx';
 import './Switch.css';
 
-export const Switch = (props: BaseSwitchProps) => {
+import type { SwitchProps } from '../../types/switch';
+
+export const Switch = ({
+    checked,
+    defaultChecked,
+    onCheckedChange,
+    disabled,
+    className,
+    ...props
+}: SwitchProps) => {
     return (
-        <BaseSwitch className={clsx('switch', 'group')} {...props}>
-            <span className={clsx('switch__action')} />
-        </BaseSwitch>
+        <SwitchPrimitive.Root
+            className={clsx('switch', 'group', className)}
+            checked={checked}
+            defaultChecked={defaultChecked}
+            onCheckedChange={onCheckedChange}
+            disabled={disabled}
+            {...props}
+        >
+            <SwitchPrimitive.Thumb className={clsx('switch__action')} />
+        </SwitchPrimitive.Root>
     );
 };
