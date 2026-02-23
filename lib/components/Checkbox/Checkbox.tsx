@@ -1,5 +1,5 @@
 import './Checkbox.css';
-import { Checkbox as BaseCheckbox } from '@headlessui/react';
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { CheckIcon } from './icons/Check';
 import { clsx } from 'clsx';
 import { MinusIcon } from './icons/Minus';
@@ -18,15 +18,24 @@ export const Checkbox = ({
     disabled = false,
     indeterminate = false,
 }: CheckboxProps) => {
+    const checkedState = indeterminate ? 'indeterminate' : checked;
+
     return (
-        <BaseCheckbox
-            indeterminate={indeterminate}
-            className={clsx(`checkbox`)}
-            checked={checked}
+        <CheckboxPrimitive.Root
+            className={clsx('checkbox')}
+            checked={checkedState}
             disabled={disabled}
-            onChange={onChange}
+            onCheckedChange={(value) => {
+                if (value === 'indeterminate') {
+                    onChange(true);
+                } else {
+                    onChange(!!value);
+                }
+            }}
         >
-            {indeterminate ? <MinusIcon /> : checked ? <CheckIcon /> : null}
-        </BaseCheckbox>
+            <CheckboxPrimitive.Indicator className="checkbox-indicator">
+                {indeterminate ? <MinusIcon /> : checked ? <CheckIcon /> : null}
+            </CheckboxPrimitive.Indicator>
+        </CheckboxPrimitive.Root>
     );
 };

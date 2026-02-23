@@ -1,4 +1,3 @@
-import type { RadioGroupProps as BaseRadioGroupProps } from '@headlessui/react';
 import { ReactNode } from 'react';
 
 export enum RadioGroupDirection {
@@ -11,8 +10,14 @@ export type OptionSlotProps = {
     disabled?: boolean;
 };
 
-export type RadioGroupProps = BaseRadioGroupProps & {
-    options: string[];
+export type RadioGroupProps = {
+    value?: string | null;
+    defaultValue?: string;
+    options?: string[];
     direction?: RadioGroupDirection;
-    optionSlot?: ({ value, disabled }: OptionSlotProps) => ReactNode;
+    optionSlot?: (props: OptionSlotProps) => ReactNode;
+    disabled?: boolean;
+    className?: string;
+    children?: ReactNode;
+    onChange?: (value: string) => void;
 };

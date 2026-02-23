@@ -1,5 +1,7 @@
-import { SwitchProps as BaseSwitchProps } from '@headlessui/react';
-
-export type SwitchProps = BaseSwitchProps & {
-    value: boolean;
+export type SwitchProps = {
+    checked?: boolean;
+    defaultChecked?: boolean;
+    onCheckedChange?: (checked: boolean) => void;
+    disabled?: boolean;
+    className?: string;
 };

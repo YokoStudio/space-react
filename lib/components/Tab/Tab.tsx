@@ -1,6 +1,6 @@
 import './Tab.css';
+import * as TabsPrimitive from '@radix-ui/react-tabs';
 import { clsx } from 'clsx';
-import { TabGroup, TabList, Tab as BaseTab } from '@headlessui/react';
 import { TabMode, TabProps } from '../../types/tab';
 
 export const Tab = ({
@@ -17,26 +17,40 @@ export const Tab = ({
         );
     }
 
+    const value =
+        selectedIndex !== undefined && items[selectedIndex]
+            ? items[selectedIndex].key
+            : undefined;
+    const defaultValue =
+        defaultIndex !== undefined && items[defaultIndex]
+            ? items[defaultIndex].key
+            : undefined;
+
+    const handleValueChange = (key: string) => {
+        const index = items.findIndex((item) => item.key === key);
+        if (index >= 0) onChange(index);
+    };
+
     return (
-        <TabGroup
-            onChange={onChange}
-            selectedIndex={selectedIndex}
-            defaultIndex={defaultIndex}
+        <TabsPrimitive.Root
+            value={value}
+            defaultValue={defaultValue}
+            onValueChange={handleValueChange}
         >
-            <TabList className={clsx('tab', mode, className, 'tab-list')}>
-                {items.map(({ key, label }, index) => (
-                    <BaseTab
+            <TabsPrimitive.List
+                className={clsx('tab', mode, className, 'tab-list')}
+            >
+                {items.map(({ key, label }) => (
+                    <TabsPrimitive.Trigger
                         key={key}
+                        value={key}
                         className={clsx('transition-all duration-300')}
-                        aria-selected={
-                            selectedIndex === index ? 'true' : 'false'
-                        }
                         aria-label={label}
                     >
                         {label}
-                    </BaseTab>
+                    </TabsPrimitive.Trigger>
                 ))}
-            </TabList>
-        </TabGroup>
+            </TabsPrimitive.List>
+        </TabsPrimitive.Root>
     );
 };

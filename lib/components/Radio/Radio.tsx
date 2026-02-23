@@ -1,9 +1,20 @@
-import {
-    Radio as BaseRadio,
-    type RadioProps as BaseRadioProps,
-} from '@headlessui/react';
+import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import { clsx } from 'clsx';
 
-export const Radio = ({ className, ...props }: BaseRadioProps) => {
-    return <BaseRadio className={clsx('radio', className)} {...props} />;
+export type RadioProps = {
+    value: string;
+    disabled?: boolean;
+    className?: string;
+};
+
+export const Radio = ({ value, disabled, className }: RadioProps) => {
+    return (
+        <RadioGroupPrimitive.Item
+            value={value}
+            disabled={disabled}
+            className={clsx('radio', className)}
+        >
+            <RadioGroupPrimitive.Indicator />
+        </RadioGroupPrimitive.Item>
+    );
 };

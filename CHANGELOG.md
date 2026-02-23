@@ -6,30 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
-## [0.3.0](https://github.com/yokostudio/space-react/releases/tag/0.3.0) <sub>/ 2025-11-13</sub>
-
 ### Changed
 - Refactored Button component to use native `<button>` element instead of HeadlessUI's BaseButton, following UI kit best practices and aligning with Input component patterns.
 - Refactored Button CSS structure: improved BEM organization, consolidated variant styles, and standardized filled variant pattern with base structure and color-specific overrides.
 - Replaced `ring` utilities with `outline` utilities throughout Button CSS for better focus state management.
 - Improved Button CSS organization with clear section comments and consistent formatting.
 
-### Added
-- Added data attributes (`data-loading`, `data-disabled`) to Button component for better state management.
-- Added comprehensive accessibility attributes to Button (aria-busy, aria-hidden for icons).
-- Enhanced Button Storybook with improved documentation, better argTypes descriptions, and visual examples including Block prop demonstration.
-- Added smooth outline transitions for Button focus states.
-- Added loading state overrides to prevent hover/focus/active interactions when button is loading.
 
-### Fixed
-- Fixed Button loading state to maintain normal visual appearance instead of showing disabled styles.
-- Fixed Button outline transition smoothness by using consistent outline width and transparent default state.
-- Fixed Spinner icon vertical centering in Button by adding proper flex alignment to icon wrapper.
-- Prevented hover, focus, and active state triggers when Button is in loading state.
+## [0.3.0](https://github.com/yokostudio/space-react/releases/tag/0.3.0) <sub>/ 2025-11-13</sub>
+### Added
+- Switched to standard, actively maintained packages: **Radix UI** primitives (Switch, Checkbox, RadioGroup, Tabs) and **@floating-ui/dom** for Tooltip positioning. Only `react` and `react-dom` are peer dependencies; no Headless UI, @floating-ui/react, or framer-motion.
+- Re-exported component props types from the main entry (e.g. `SwitchProps`, `DropdownProps`, `TooltipProps`) for easier typing in consumer apps.
+
+### Changed
+- **Tooltip:** Now uses @floating-ui/dom for positioning (computePosition, arrow, flip, autoUpdate) with custom hover/focus and delay; design unchanged.
+- **Textarea:** Replaced Headless UI with native `<textarea>`; same wrapper and design.
+- **Switch, Checkbox, RadioGroup, Tab:** Implemented with Radix UI primitives; same CSS and public API.
+- **Dropdown:** Custom listbox implementation with @floating-ui/dom for positioning; supports single and multi-select; DropdownOption and DropdownGroup unchanged.
+- **Requirements:** Only React and React DOM (>= 18.0.0) are required; no extra peer install.
 
 ### Removed
-- Removed HeadlessUI dependency from Button component (no longer requires `@headlessui/react` for Button).
+- Removed `@headlessui/react`, `@floating-ui/react`, and `framer-motion` from peer and dev dependencies.
 
 ## [0.2.2](https://github.com/yokostudio/space-react/releases/tag/0.2.2) <sub>/ 2025-11-12</sub>
 ### Fixed

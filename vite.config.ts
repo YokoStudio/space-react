@@ -36,22 +36,12 @@ export default defineConfig(({ mode }) => {
                 },
                 cssCodeSplit: false,
                 rollupOptions: {
-                    external: [
-                        'react',
-                        'react-dom',
-                        'react/jsx-runtime',
-                        '@headlessui/react',
-                        '@floating-ui/react',
-                        'framer-motion',
-                    ],
+                    external: ['react', 'react-dom', 'react/jsx-runtime'],
                     output: {
                         globals: {
                             react: 'React',
                             'react-dom': 'ReactDOM',
                             'react/jsx-runtime': 'ReactJSXRuntime',
-                            '@headlessui/react': 'HeadlessUI',
-                            '@floating-ui/react': 'FloatingUI',
-                            'framer-motion': 'FramerMotion',
                         },
                         assetFileNames: (assetInfo) =>
                             assetInfo.name?.endsWith('.css')

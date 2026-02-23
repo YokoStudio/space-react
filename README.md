@@ -12,24 +12,9 @@ yarn add @yokostudio/space-react
 pnpm add @yokostudio/space-react
 ```
 
-### Peer Dependencies
+### Requirements
 
-This library requires the following peer dependencies to be installed in your project:
-
-```bash
-npm install react react-dom @headlessui/react @floating-ui/react framer-motion
-# or
-yarn add react react-dom @headlessui/react @floating-ui/react framer-motion
-# or
-pnpm add react react-dom @headlessui/react @floating-ui/react framer-motion
-```
-
-**Required peer dependencies:**
-- `react` >= 17.0.0
-- `react-dom` >= 17.0.0
-- `@headlessui/react` ^2.0.0
-- `@floating-ui/react` ^0.27.0
-- `framer-motion` ^12.0.0
+Only **React** and **React DOM** are required in your project (React 18 or later recommended). The library has no other peer dependencies and uses standard packages (Radix UI primitives, @floating-ui/dom) internally.
 
 ## Usage
 
@@ -76,12 +61,11 @@ import '@yokostudio/space-react/style';
 
 ## Requirements
 
-- React >= 17.0.0
-- React DOM >= 17.0.0
-- @headlessui/react ^2.0.0
-- @floating-ui/react ^0.27.0
-- framer-motion ^12.0.0
-- TypeScript (for type definitions)
+- React >= 18.0.0
+- React DOM >= 18.0.0
+- TypeScript (optional, for type definitions)
+
+Components are accessible by default (keyboard, focus, ARIA) via Radix UI and custom implementations.
 
 ## Styling
 
