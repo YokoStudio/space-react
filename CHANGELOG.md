@@ -6,7 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Refactored Button component to use native `<button>` element instead of HeadlessUI's BaseButton, following UI kit best practices and aligning with Input component patterns.
+- Refactored Button CSS structure: improved BEM organization, consolidated variant styles, and standardized filled variant pattern with base structure and color-specific overrides.
+- Replaced `ring` utilities with `outline` utilities throughout Button CSS for better focus state management.
+- Improved Button CSS organization with clear section comments and consistent formatting.
 
+
+## [0.3.0](https://github.com/yokostudio/space-react/releases/tag/0.3.0) <sub>/ 2025-11-13</sub>
 ### Added
 - Switched to standard, actively maintained packages: **Radix UI** primitives (Switch, Checkbox, RadioGroup, Tabs) and **@floating-ui/dom** for Tooltip positioning. Only `react` and `react-dom` are peer dependencies; no Headless UI, @floating-ui/react, or framer-motion.
 - Re-exported component props types from the main entry (e.g. `SwitchProps`, `DropdownProps`, `TooltipProps`) for easier typing in consumer apps.
